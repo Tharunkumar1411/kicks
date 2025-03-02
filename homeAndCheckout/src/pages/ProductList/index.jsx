@@ -9,24 +9,38 @@ import { useTheme } from '@mui/material/styles';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Drawer from '@mui/material/Drawer';
 import CloseIcon from '@mui/icons-material/Close';
-import { getProductList } from "../../api/product";
+import { getFilterProperties, getProductList } from "../../api/product";
 import useProductStore from "../../store/productList";
 import ProductListCard from "../../components/ProductListCard";
+import Loader from "../../components/Loader"
 
 export default function ProductList(){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const setProductList = useProductStore(state => state.setProductList);
+    const setFilterProperty = useProductStore(state => state.setFilterProperty);
     const [category, setCategory] = useState("Life Style");
     const [showMenu, setShowMenu] = useState(false);
     const [filter, setFilter] = useState({color: "", size: "", categories: [], gender: [], price: ""})
     const [filterDrawer, setFilterDrawer] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getProductList().then((res) => {
-            setProductList(res)
-        });
-    },[])
+        Promise.allSettled([getProductList(), getFilterProperties()])
+            .then(results => {
+                console.log("filterProperty", results);
+
+                if (results[0].status === "fulfilled") {
+                    setProductList(results[0].value);
+                }
+                if (results[1].status === "fulfilled") {
+                    setFilterProperty(results[1].value);
+                    console.log("filterProperty", results[1].value);
+                }
+            })
+            .catch(error => console.error("Unexpected Error:", error)).finally(() => setLoading(false))
+    }, []);
+    
 
     const handleCateogry = () => {  
         setShowMenu(prev => !prev);
@@ -50,61 +64,66 @@ export default function ProductList(){
       };
 
     return(
-        <div className={styles.rootContainer}>
-            <div className={styles.topBanner} style={{backgroundImage:`url(${productBanner})`}}>
-                <div className={styles.bannerContent}>
-                    <Typography className={styles.label}>Limited time only</Typography>
-                    <Typography className={styles.header}>Get 30% off</Typography>
-                    <Typography className={styles.label}>Sneakers made with your comfort in mind so you can put all of your focus into your next session.</Typography>
-                </div>
-            </div>
-
-            <div className={styles.filterBtnContainer}>
-                {isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
-                {isMobile && <button onClick={handleFilter} className={styles.categoryBtn}>Filter <FilterListIcon /></button>}
-            </div>
-
-            <div className={styles.catergoryContainer}>
-              
-                <Typography className={styles.category}>Life Style Shoes <label className={styles.label}>122 item</label></Typography>
-                <div style={{display:"flex", flexDirection:"column", gap:"20px"}}>
-                    {!isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
-                    
-                    {showMenu &&
-                        <div className={styles.categoryList}>
-                            <div style={{width:"100%", textAlign:"center"}}>
-                                {["Life Style", "Sports", "Casuals", "Trending"].map((item) => (
-                                    <Typography onClick={() => handleCateogrySelection(item)} className={styles.menuText} style={(category === item) ? {fontWeight: "800"}: {}}> {item}<hr /></Typography>                                
-                                ))}
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-
-            <div className={styles.filterContainer}>
-                <div className={styles.filter}>
-                   {!isMobile && <FilterComponent filter={filter} setFilter={setFilter}/>}
-                </div>
-                <div className={styles.productContainer}>
-                    <ProductListCard />
-                </div>
-            </div>
-            
-            {isMobile &&
-                <Drawer
-                    open={filterDrawer}
-                    onClose={toggleDrawer()}
-                >  
-                <div style={{padding:"20px"}}>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                        <Typography style={{fontWeight:"600", fontFamily:"RubikSemiBold", fontSize:"16px"}}>Filter</Typography>
-                        <CloseIcon onClick={handleFilter}/>
+        <div>
+            {!loading ?  
+                <div className={styles.rootContainer}>
+                <div className={styles.topBanner} style={{backgroundImage:`url(${productBanner})`}}>
+                    <div className={styles.bannerContent}>
+                        <Typography className={styles.label}>Limited time only</Typography>
+                        <Typography className={styles.header}>Get 30% off</Typography>
+                        <Typography className={styles.label}>Sneakers made with your comfort in mind so you can put all of your focus into your next session.</Typography>
                     </div>
-                    <FilterComponent filter={filter} setFilter={setFilter}/>
                 </div>
-                </Drawer>
-             }
-        </div>
+
+                <div className={styles.filterBtnContainer}>
+                    {isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
+                    {isMobile && <button onClick={handleFilter} className={styles.categoryBtn}>Filter <FilterListIcon /></button>}
+                </div>
+
+                <div className={styles.catergoryContainer}>
+                
+                    <Typography className={styles.category}>Life Style Shoes <label className={styles.label}>122 item</label></Typography>
+                    <div style={{display:"flex", flexDirection:"column", gap:"20px"}}>
+                        {!isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
+                        
+                        {showMenu &&
+                            <div className={styles.categoryList}>
+                                <div style={{width:"100%", textAlign:"center"}}>
+                                    {["Life Style", "Sports", "Casuals", "Trending"].map((item) => (
+                                        <Typography onClick={() => handleCateogrySelection(item)} className={styles.menuText} style={(category === item) ? {fontWeight: "800"}: {}}> {item}<hr /></Typography>                                
+                                    ))}
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div className={styles.filterContainer}>
+                    <div className={styles.filter}>
+                    {!isMobile && <FilterComponent filter={filter} setFilter={setFilter}/>}
+                    </div>
+                    <div className={styles.productContainer}>
+                        <ProductListCard />
+                    </div>
+                </div>
+                
+                {isMobile &&
+                    <Drawer
+                        open={filterDrawer}
+                        onClose={toggleDrawer()}
+                    >  
+                    <div style={{padding:"20px"}}>
+                        <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                            <Typography style={{fontWeight:"600", fontFamily:"RubikSemiBold", fontSize:"16px"}}>Filter</Typography>
+                            <CloseIcon onClick={handleFilter}/>
+                        </div>
+                        <FilterComponent filter={filter} setFilter={setFilter} />
+                    </div>
+                    </Drawer>
+                }
+            </div> 
+        : 
+            <Loader /> }
+        </div> 
     )
 }
