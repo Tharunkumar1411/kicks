@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorSizePallate from "../ColorSizePallate";
 import { useParams } from "react-router-dom";
 import { Checkbox, FormControlLabel, Typography, Box, Slider } from "@mui/material";
@@ -6,31 +6,18 @@ import styles from "./styles.module.scss"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CustomButton from "../CustomButton";
+import { getFilterProperties } from "../../api/product";
+import useProductStore from "../../store/productList";
 
-const FilterComponent = ({filter, setFilter}) => {
+const FilterComponent = ({filter, setFilter, data}) => {
     const [dropDown, setDropDown] = useState({category: true, gender: true, price: true});
     const [val, setVal] = React.useState(0);
-    
+    const filterProperty = useProductStore(state => state.filterProperty);
+
     const handleChange = (_, newValue) => {
       setVal(newValue);
       setFilter({...filter, price: newValue})
     };
-
-    const dummy = {
-        availableSize: [38,41,42,44,45,46],
-        availableColors: ['#4A69E2', '#FFA52F', '#232321', '#234D41', '#353336'],
-        availableCategories: ['Casual shoes', 'Runners', 'Hiking', 'Sneaker', 'Basketball', 'Golf', 'Outdoor'],
-        gender: ['Male', 'Female'],
-        price: [{
-            value: 0,
-            label: '',
-          },
-          {
-            value: 10000,
-            label: '',
-          }
-        ]
-    }
 
     function valuetext(value) {
         return `₹ ${value}`;
@@ -56,11 +43,12 @@ const FilterComponent = ({filter, setFilter}) => {
     }
 
     const handleApply = () => {
+        console.log("check filter", filter);
     }
 
     return(
         <div className={styles.rootContainer}>
-           <ColorSizePallate data={dummy} selectedItem={filter} setSelectedItem={setFilter} />
+           <ColorSizePallate data={filterProperty} selectedItem={filter} setSelectedItem={setFilter} />
 
            <div className={styles.categoryContainer}>
                 <div className={styles.dropMenu}>
@@ -70,7 +58,7 @@ const FilterComponent = ({filter, setFilter}) => {
 
                 {dropDown.category && 
                     <div className={styles.category}>
-                        {dummy?.availableCategories.map((item, index) => (
+                        {filterProperty?.availableCategories.map((item, index) => (
                             <FormControlLabel key={index} value={item} onChange={() => handleFilter('category', item)} control={<Checkbox />} label={item} />
                         ))}
                     </div>
@@ -85,7 +73,7 @@ const FilterComponent = ({filter, setFilter}) => {
 
                 {dropDown.gender && 
                     <div className={styles.category}>
-                        {dummy?.gender.map((item, index) => (
+                        {filterProperty?.gender.map((item, index) => (
                             <FormControlLabel onChange={() => handleFilter('gender', item)} key={index} value={item} control={<Checkbox />} label={item} />
                         ))}
                     </div>
@@ -101,7 +89,7 @@ const FilterComponent = ({filter, setFilter}) => {
                 {dropDown.price &&
                 <Box>
                    <Slider
-                        marks={dummy.price}
+                        marks={filterProperty.price}
                         step={10}
                         value={val}
                         valueLabelDisplay="auto"
