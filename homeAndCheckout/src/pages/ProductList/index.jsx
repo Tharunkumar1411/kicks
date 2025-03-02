@@ -21,7 +21,7 @@ export default function ProductList(){
     const setFilterProperty = useProductStore(state => state.setFilterProperty);
     const [category, setCategory] = useState("Life Style");
     const [showMenu, setShowMenu] = useState(false);
-    const [filter, setFilter] = useState({color: "", size: "", categories: [], gender: [], price: ""})
+    const [filter, setFilter] = useState({color: [], size: "", categories: [], gender: [], price: ""})
     const [filterDrawer, setFilterDrawer] = useState(false);
     const [loading, setLoading] = useState(true);
 

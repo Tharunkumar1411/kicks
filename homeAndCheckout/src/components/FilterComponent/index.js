@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ColorSizePallate from "../ColorSizePallate";
-import { useParams } from "react-router-dom";
 import { Checkbox, FormControlLabel, Typography, Box, Slider } from "@mui/material";
 import styles from "./styles.module.scss"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CustomButton from "../CustomButton";
-import { getFilterProperties } from "../../api/product";
 import useProductStore from "../../store/productList";
+import { filterProduct } from "../../utils/helper";
 
 const FilterComponent = ({filter, setFilter, data}) => {
     const [dropDown, setDropDown] = useState({category: true, gender: true, price: true});
     const [val, setVal] = React.useState(0);
     const filterProperty = useProductStore(state => state.filterProperty);
+    const productList = useProductStore(state => state.productList);
+    const setProductList = useProductStore(state => state.setProductList);
+
 
     const handleChange = (_, newValue) => {
       setVal(newValue);
@@ -43,12 +45,13 @@ const FilterComponent = ({filter, setFilter, data}) => {
     }
 
     const handleApply = () => {
-        console.log("check filter", filter);
+        const filteredList = filterProduct(productList, filter);
+        setProductList(filteredList);
     }
 
     return(
         <div className={styles.rootContainer}>
-           <ColorSizePallate data={filterProperty} selectedItem={filter} setSelectedItem={setFilter} />
+           <ColorSizePallate data={filterProperty} selectedItem={filter} setSelectedItem={setFilter} fromFilter={true}/>
 
            <div className={styles.categoryContainer}>
                 <div className={styles.dropMenu}>
