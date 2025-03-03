@@ -28,14 +28,11 @@ export default function ProductList(){
     useEffect(() => {
         Promise.allSettled([getProductList(), getFilterProperties()])
             .then(results => {
-                console.log("filterProperty", results);
-
                 if (results[0].status === "fulfilled") {
                     setProductList(results[0].value);
                 }
                 if (results[1].status === "fulfilled") {
                     setFilterProperty(results[1].value);
-                    console.log("filterProperty", results[1].value);
                 }
             })
             .catch(error => console.error("Unexpected Error:", error)).finally(() => setLoading(false))

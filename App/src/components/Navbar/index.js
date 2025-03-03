@@ -3,12 +3,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from 'react';
 import styles from "./styles.module.scss" 
 import { Typography } from '@mui/material';
-import { AnimatePresence, motion } from "framer-motion";
 import { Squash as Hamburger } from "hamburger-react";
 import PersonIcon from '@mui/icons-material/Person';
 import logoImg from "../../assets/images/Logo.svg"
 import CartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
 import { NavItems } from '../../utils/constants';
 import  isAuthenticate  from '../../Hook/isAuthenticate';
 import {  useNavigate } from 'react-router-dom';
@@ -41,19 +39,7 @@ function NavBar() {
                     (
                         <div className={styles.navMenuItems}>
                             {(NavItems.map((item, idx) => (
-                                <motion.Typography
-                                    initial={{ scale: 0, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 260,
-                                        damping: 20,
-                                        delay: 0.1 + idx / 10,
-                                    }}
-                                    key={idx}
-                                >
-                                    <Typography className={styles.menuOption}>{item}</Typography>
-                                </motion.Typography>
+                                <Typography className={styles.menuOption} key={idx}>{item}</Typography>
                             )))}
                         </div>
                     )

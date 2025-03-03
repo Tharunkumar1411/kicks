@@ -46,8 +46,8 @@ export default function Product(){
                     <div className={styles.rootContainer}>
                         {isMobile ? <CustomCarousel data={productDetails} /> :
                            <div className={styles.previewRootContainer}>
-                                {Array(2).fill(0).map((rowIndex) => (
-                                    <div key={rowIndex} className={styles.previewContainer}>
+                                {Array(2).fill(0).map((rowIndex, ind) => (
+                                    <div key={ind} className={styles.previewContainer}>
                                     {productDetails?.previewImg.slice(rowIndex * 2, rowIndex * 2 + 2).map((imageUrl, index) => (
                                         <div
                                             key={index}
