@@ -10,7 +10,7 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
         size: data?.availableSize?.[0] || ''
       });
     }
-  }, [fromFilter, data, selectedItem, setSelectedItem]);
+  }, [fromFilter, data?.availableColors, data?.availableSize]);
 
   const getLogic = useCallback((color, item) => {
     return (fromFilter && color.includes(item)) || color === item;
@@ -53,7 +53,7 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
       <div className={styles.colorContainer}>
         <p className={styles.pallateHeader}>COLOR</p>
         <div className={styles.pallateContainer}>
-          {data?.availableColors?.map((item) => {
+          {data?.availableColors?.map((item, index) => {
             const isSelected = getLogic(selectedItem.color, item);
             const colorStyle = isSelected
               ? { border: `2px solid ${item}`, padding: '5px', borderRadius: '25px', outline: 'none' }
@@ -61,7 +61,7 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
 
             return (
               <div
-                key={item}
+                key={index}
                 onClick={() => handleColorClick(item)}
                 style={colorStyle}
               >
@@ -76,14 +76,14 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
       <div className={styles.sizeContainer}>
         <p className={styles.pallateHeader}>SIZE</p>
         <div className={styles.pallateContainer}>
-          {data?.availableSize?.map((item) => {
+          {data?.availableSize?.map((item, index) => {
             const isSelected = item === selectedItem.size;
             const sizeStyle = isSelected
               ? { backgroundColor: '#000', color: '#fff', borderRadius: '15px' }
               : { color: '#000', backgroundColor: '#fff', borderRadius: '16px', cursor: 'pointer' };
 
             return (
-              <div key={item} onClick={() => handleSizeClick(item)} style={sizeStyle}>
+              <div key={index} onClick={() => handleSizeClick(item)} style={sizeStyle}>
                 <div className={styles.sizePallate}>{item}</div>
               </div>
             );
