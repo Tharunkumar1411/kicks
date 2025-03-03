@@ -13,6 +13,7 @@ import { NavItems } from '../../utils/constants';
 import  isAuthenticate  from '../../Hook/isAuthenticate';
 import {  useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
+import NavDrawer from './Drawer';
 
 function NavBar() {
   const theme = useTheme();
@@ -64,42 +65,13 @@ function NavBar() {
             </div>
 
             <div className={styles.navProfileItems}>
-                {!isMobile && <SearchIcon style={{cursor:"pointer"}}/>}
                 <PersonIcon onClick={handleProfileClick} style={{cursor:"pointer"}} />
                 <CartIcon style={{cursor:"pointer"}} />
             </div>
         </div>
 
         {isMobile &&
-            <AnimatePresence className={styles.rootMenuContainer}>
-                {open && (
-                    <motion.div  
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className={styles.animatedContainer}
-                    >
-                        <div className={styles.dropMenu}>
-                            {(NavItems.map((item, idx) => (
-                                <motion.Typography
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 260,
-                                    damping: 20,
-                                    delay: 0.1 + idx / 10,
-                                }}
-                                key={idx}
-                                >
-                                    <Typography className={styles.dropOption}>{item}</Typography>
-                                </motion.Typography>
-                            )))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+           <NavDrawer open={open} setOpen={setOpen}/>
         }
     </div>
   );
