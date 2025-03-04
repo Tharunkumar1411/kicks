@@ -16,7 +16,8 @@ export default function Cart(){
     const { id } = useParams();
 
     const handleQuantity = (val) => {
-        if(quantity !== 1 || val !== -1){
+        console.log(val)
+        if((quantity !== 1 || val !== -1) && (quantity <= 4)){
             setQuantity(prev => prev + val)
         }
     }
@@ -35,8 +36,8 @@ export default function Cart(){
                     <span>Items in your bag not reserved- check out now to make them yours.</span>
                     
                     <div style={{display:"flex", flexDirection:"column", gap:"20px", marginTop:"20px"}}>
-                        {[1].map((item) => (
-                            <div className={styles.detailsContainer}>
+                        {[1].map((item, index) => (
+                            <div className={styles.detailsContainer} key={index}>
                                 <img 
                                     src={categoryOne} 
                                     className={styles.categoryImg}

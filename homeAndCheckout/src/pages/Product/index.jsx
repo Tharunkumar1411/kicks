@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { Typography, useMediaQuery } from "@mui/material";
+import { Drawer, Typography, useMediaQuery } from "@mui/material";
 import ColorSizePallate from "../../components/ColorSizePallate";
 import CustomButton from "../../components/CustomButton";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,13 +12,16 @@ import { getProductDetails } from "../../api/home";
 import { formatAmount } from "../../utils/helper";
 import Loader from "../../components/Loader";
 import useHomeStore from "../../store/home";
+import useCartStore from "../../store/cart";
+import Cart from "../Cart";
 
 export default function Product(){
     const { id } = useParams();
     const [cart, setCart] = useState({color: "", size: "", productId: id});
+    const [openCart, setOpenCart] = useState(false);
     const isMobile = useMediaQuery("(max-width:1024px)");
-    const productDetails = useHomeStore(state => state.productDetails);
-    const setProductDetails = useHomeStore(state => state.setProductDetails)
+    const {productDetails, setProductDetails} = useHomeStore(state => state);
+    const {setCartItems, cartItems} =  useCartStore(state => state)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +35,11 @@ export default function Product(){
     }
 
     const handleAddToCart = () => {
-        
+        if(cartItems?.includes(id)){
+            setOpenCart(true);
+            return;
+        }
+        setCartItems(id);
     }
 
     const handleFav = () => {
@@ -67,7 +74,7 @@ export default function Product(){
 
                             <div className={styles.btnContainer}>
                                 <div className={styles.rowBtn}>
-                                    <CustomButton onClick={handleAddToCart} children="ADD TO CART" sx={{backgroundColor:"#000", color: "#fff", width:"100%"}}/>
+                                    <CustomButton onClick={handleAddToCart} children={(cartItems?.includes(id) ? `VIEW CART` : `ADD TO CART`)} sx={{backgroundColor:"#000", color: "#fff", width:"100%"}}/>
                                     <CustomButton onClick={handleFav} children={<FavoriteBorderIcon />} sx={{backgroundColor:"#000", color: "#fff", width: "fit-content"}}/>
                                 </div>
                             <CustomButton onClick={() => handleBuy(id)} children="BUY IT NOW" sx={{backgroundColor:"#4A69E2", color: "#fff"}}/>
@@ -92,6 +99,14 @@ export default function Product(){
 
                         <NewDropCard />
                     </div>
+
+                    <Drawer
+                        anchor="right"
+                        open={openCart}
+                        onClose={() => setOpenCart(false)}
+                    >
+                        <Cart />
+                    </Drawer>
                 </div>
             : 
                 <Loader />

@@ -22,6 +22,10 @@
         }
     }
 
+    .categoryBtn:focus-visible{
+        outline: none;
+    }
+
     .categoryList{
         color: #000;
         background-color:#F4F2F2;
