@@ -28,20 +28,16 @@
     }
 
     .checkoutContainer{
-        @include flexRow;
+        @include flexCol;
         gap: 47px;
         align-items: flex-start;
         margin: 20px;
-        
-        @media screen and (max-width: 768px) {
-            @include flexCol;
-        }
+    
        
         .productCard{
             background-color: #fff;
             border-radius: 16px;
-            padding: 20px;
-            width: 50%;
+            width: 100%;
 
             @media screen and (max-width: 768px) {
                 width: fit-content;

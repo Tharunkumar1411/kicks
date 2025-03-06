@@ -105,7 +105,7 @@ export default function Product(){
                         open={openCart}
                         onClose={() => setOpenCart(false)}
                     >
-                        <Cart />
+                        <Cart setOpenCart={setOpenCart}/>
                     </Drawer>
                 </div>
             : 
