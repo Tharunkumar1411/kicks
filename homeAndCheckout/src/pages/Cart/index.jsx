@@ -5,11 +5,11 @@ import categoryOne from "../../assets/images/categoryOne.png"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import NewDropCard from "../../components/NewDropCard";
 import OrderSummaryCard from "../../components/OrderSummaryCard";
 import { useParams } from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function Cart(){
+export default function Cart({setOpenCart}){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [quantity, setQuantity] = useState(1);
@@ -24,6 +24,7 @@ export default function Cart(){
 
     return(
         <div className={styles.rootContainer}>
+            <CloseIcon style={{margin: "10px 20px 0 20px"}} onClick={() => setOpenCart(false)}/>
             <div className={styles.savingContainer}>
                 <Typography className={styles.header}>Saving to celebrate</Typography>
                 <span className={styles.label}>Enjoy up to 60% off thousands of styles during the End of Year sale - while suppiles last. No code needed.</span>
@@ -36,7 +37,7 @@ export default function Cart(){
                     <span>Items in your bag not reserved- check out now to make them yours.</span>
                     
                     <div style={{display:"flex", flexDirection:"column", gap:"20px", marginTop:"20px"}}>
-                        {[1].map((item, index) => (
+                        {[1,2].map((item, index) => (
                             <div className={styles.detailsContainer} key={index}>
                                 <img 
                                     src={categoryOne} 
@@ -51,7 +52,7 @@ export default function Cart(){
                                             <div className={styles.sizeContainer}>
                                                 <div className={styles.label}>Size 10 </div>
                                                 <div className={styles.label}>
-                                                    Quantity {quantity} <KeyboardArrowUpIcon onClick={() => handleQuantity(1)} fontSize="medium" style={{position:"relative", top:"5px"}}/> <KeyboardArrowDownIcon onClick={() => handleQuantity(-1)} fontSize="medium" style={{position:"relative", top:"5px"}}/>
+                                                    Quantity {quantity} 
                                                 </div>
                                             </div>
 
@@ -70,14 +71,6 @@ export default function Cart(){
                 </div>
 
                 <OrderSummaryCard />
-            </div>
-            <div className={styles.newDropContainer}>
-                <div className={styles.dropContent}>
-                    <Typography className={styles.header}>You may also like</Typography>
-                    <button className={styles.button}>EXPLORE</button>
-                </div>
-
-                <NewDropCard />
             </div>
         </div>
     )
