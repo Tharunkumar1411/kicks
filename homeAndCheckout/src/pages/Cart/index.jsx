@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import categoryOne from "../../assets/images/categoryOne.png"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import OrderSummaryCard from "../../components/OrderSummaryCard";
 import { useParams } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';

@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from 'react';
 import styles from "./styles.module.scss" 
-import { Typography } from '@mui/material';
+import { Badge, Typography } from '@mui/material';
 import { Squash as Hamburger } from "hamburger-react";
 import PersonIcon from '@mui/icons-material/Person';
 import logoImg from "../../assets/images/Logo.svg"
@@ -52,7 +52,9 @@ function NavBar() {
 
             <div className={styles.navProfileItems}>
                 <PersonIcon onClick={handleProfileClick} style={{cursor:"pointer"}} />
-                <CartIcon style={{cursor:"pointer"}} />
+                <Badge badgeContent={4} color="primary">
+                    <CartIcon style={{cursor:"pointer"}} />
+                </Badge>
             </div>
         </div>
 
