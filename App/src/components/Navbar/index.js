@@ -12,7 +12,7 @@ import  isAuthenticate  from '../../Hook/isAuthenticate';
 import {  useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import NavDrawer from './Drawer';
-import useCartStore from '../../../../homeAndCheckout/src/store/cart';
+import useCartStore from 'home/cartStore';
 
 function NavBar() {
   const theme = useTheme();
