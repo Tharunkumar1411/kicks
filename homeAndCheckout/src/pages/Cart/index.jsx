@@ -68,7 +68,7 @@ export default function Cart({setOpenCart}){
                     
                 </div>
 
-                <OrderSummaryCard />
+                <OrderSummaryCard onClose={setOpenCart}/>
             </div>
         </div>
     )

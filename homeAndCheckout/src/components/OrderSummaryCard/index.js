@@ -5,7 +5,7 @@ import CustomButton from "../CustomButton";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
 
-const OrderSummaryCard = () => {
+const OrderSummaryCard = ({onClose}) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));    
@@ -37,6 +37,7 @@ const OrderSummaryCard = () => {
                     <Typography className={styles.header}>$1340</Typography>
                 </div>
                 <CustomButton onClick={handleSummary} children="CHECKOUT" sx={{backgroundColor:"#000", color: "#fff", width:"100%", marginTop:"15px"}}/>
+                <CustomButton onClick={() => onClose(false)} children="CLOSE" sx={{backgroundColor:"#fff", color: "#000", width:"100%", marginTop:"15px"}}/>
             </div>
         </div>
     )
