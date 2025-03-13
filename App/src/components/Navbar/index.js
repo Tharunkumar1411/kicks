@@ -12,12 +12,14 @@ import  isAuthenticate  from '../../Hook/isAuthenticate';
 import {  useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/routes';
 import NavDrawer from './Drawer';
+import useCartStore from '../../../../homeAndCheckout/src/store/cart';
 
 function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [open, setOpen] = useState(false);
   const {token} = isAuthenticate();
+  const {cartItems} = useCartStore(state => state)
 
   const nav = useNavigate()
   
@@ -26,6 +28,8 @@ function NavBar() {
         nav(ROUTES.LOGIN)
     }
   }
+
+  console.log("cartItems", cartItems)
 
   return(
     <div>
@@ -52,7 +56,7 @@ function NavBar() {
 
             <div className={styles.navProfileItems}>
                 <PersonIcon onClick={handleProfileClick} style={{cursor:"pointer"}} />
-                <Badge badgeContent={4} color="primary">
+                <Badge badgeContent={cartItems.length} color="primary">
                     <CartIcon style={{cursor:"pointer"}} />
                 </Badge>
             </div>
