@@ -64,6 +64,7 @@ module.exports = (_, argv) => ({
         "./CartApp": "./src/pages/Cart/index.jsx",
         "./CheckoutApp": "./src/pages/Checkout/index.jsx",
         "./ProductListApp": "./src/pages/ProductList/index.jsx",
+        "./cartStore": "./src/store/cart/index.js"
       },
       shared: {
         ...deps,
