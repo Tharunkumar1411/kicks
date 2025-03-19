@@ -4,17 +4,16 @@ import styles from "./styles.module.scss";
 import categoryOne from "../../assets/images/categoryOne.png"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import OrderSummaryCard from "../../components/OrderSummaryCard";
-import { useParams } from "react-router-dom";
 import CloseIcon from '@mui/icons-material/Close';
+import useCartStore from "../../store/cart";
 
 export default function Cart({setOpenCart}){
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [quantity, setQuantity] = useState(1);
-    const { id } = useParams();
+    const {cartItems} = useCartStore(state => state)
 
     const handleQuantity = (val) => {
-        console.log(val)
         if((quantity !== 1 || val !== -1) && (quantity <= 4)){
             setQuantity(prev => prev + val)
         }
@@ -35,7 +34,7 @@ export default function Cart({setOpenCart}){
                     <span>Items in your bag not reserved- check out now to make them yours.</span>
                     
                     <div style={{display:"flex", flexDirection:"column", gap:"20px", marginTop:"20px"}}>
-                        {[1,2].map((item, index) => (
+                        {[cartItems?.length]?.map((item, index) => (
                             <div className={styles.detailsContainer} key={index}>
                                 <img 
                                     src={categoryOne} 
