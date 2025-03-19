@@ -28,9 +28,7 @@ function NavBar() {
         nav(ROUTES.LOGIN)
     }
   }
-
-  console.log("cartItems", cartItems)
-
+  
   return(
     <div>
         <div className={styles.navRootContainer}>

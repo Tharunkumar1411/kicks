@@ -7,7 +7,7 @@ const useCartStore = create(
       cartItems: [],
       setCartItems: (details) => {
         set((state) => ({
-            cartItems: [...state.cartItems, details],
+            cartItems: (state.cartItems?.includes(details) ? null : [...state.cartItems, details]),
         }));
       }
     }),
