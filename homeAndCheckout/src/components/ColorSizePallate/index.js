@@ -34,12 +34,21 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
     }
   };
 
+
   // Handle size toggle (only one size can be selected)
   const handleSizeClick = (size) => {
+    if (fromFilter) {
+      setSelectedItem({
+        ...selectedItem,
+        size: selectedItem.size === size ? null : size, // Toggle size: null if selected, otherwise set it
+      });
+      return;
+    }
     setSelectedItem({
       ...selectedItem,
-      size: selectedItem.size === size ? null : size, // Toggle size: null if selected, otherwise set it
+      size,
     });
+  
   };
 
   // Return early if data is not available
