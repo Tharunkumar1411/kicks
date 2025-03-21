@@ -19,7 +19,6 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
   // Handle color toggle
   const handleColorClick = (color) => {
     if (fromFilter) {
-      // If `fromFilter` is true, toggle color from the array
       setSelectedItem({
         ...selectedItem,
         color: selectedItem.color.includes(color)
@@ -34,13 +33,11 @@ const ColorSizePallate = ({ data, setSelectedItem, selectedItem, fromFilter }) =
     }
   };
 
-
-  // Handle size toggle (only one size can be selected)
   const handleSizeClick = (size) => {
     if (fromFilter) {
       setSelectedItem({
         ...selectedItem,
-        size: selectedItem.size === size ? null : size, // Toggle size: null if selected, otherwise set it
+        size: selectedItem.size === size ? null : size,
       });
       return;
     }
