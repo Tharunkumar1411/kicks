@@ -24,7 +24,6 @@ function Login(){
             sessionStorage.setItem("Auth Token", userDetails?.user?.accessToken);
             nav(ROUTES.HOME);
         } catch (error) {
-            console.log("chekc error::", error)
         } finally {
             setLoading(prev => !prev)
         }
