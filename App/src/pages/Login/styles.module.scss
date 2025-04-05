@@ -25,7 +25,7 @@
        
         .registerTxt{
             color: var(--Dark-Gray, #232321);
-            font-family: RubikSemiBold;
+            font-family: "RubikSemiBold";
             font-size: 36px;
         }
 
@@ -72,7 +72,7 @@
 
             .label{
                 color: var(--Dark-Gray, #232321);
-                font-family: RubikSemiBold;
+                font-family: "RubikSemiBold";
                 font-size: 24px;
                 margin-bottom: 1rem;
             }
@@ -80,6 +80,11 @@
                 border-radius: 8px;
                 border: 1px solid var(--Dark-Gray, #232321);
                 height: 48px;
+                width: 440px;
+
+                @media screen and (max-width: 768px) {
+                    width: 100%;
+                }
             }
 
             .passwordHelpTxt{
@@ -90,12 +95,12 @@
                 font-weight: 400;
                 line-height: normal;
                 letter-spacing: 0.4px;
-                width: 480px;
+                width: 100%;
                 margin-top: 0.2rem;
 
-                @media screen and (max-width: 768px) {
-                    width: 348px;
-                }
+                // @media screen and (max-width: 768px) {
+                //     width: 348px;
+                // }
             }
 
             .registerBtn{

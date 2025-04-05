@@ -5,7 +5,7 @@ import GoogleImg from "../../assets/images/GoogleIcon.svg"
 import AppleImg from "../../assets/images/AppleIcon.svg"
 import FbImg from "../../assets/images/FaceBookIcon.svg"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { GENDERS, REGISTER_DETAILS, allowAlphabets } from "../../utils/constants";
+import { GENDERS, REGISTER_DETAILS, allowAlphabets, validationRules } from "../../utils/constants";
 import JoinCard from "../../components/JoinCard";
 import { handleAppleAuth, handleEmailAuth, handleFbAuth, handleGoogleAuth } from "../../utils/auth";
 import { useState } from "react";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register(){
     const [loading, setLoading] = useState(false);
+    const [password, setPassword] = useState("");
     const nav = useNavigate();
 
     const nameValidation = (value = "") => {
@@ -28,21 +29,29 @@ function Register(){
         }
     }
 
+    const checkValidation = (rule) => rule.regex.test(password);
+
+    const handleNavLogin = () => {
+        nav(ROUTES.LOGIN);
+    }
+
     return(
         <div className={styles.registerRootContainer}>
             <div className={styles.registerContainer}>
-                <div>
+                <div style={{marginBlock:"20px"}}>
                     <Typography className={styles.registerTxt}>Register</Typography>
-                    <Typography className={styles.registerSubTxt}>Sign up with</Typography>
+                    <Typography className={styles.registerSubTxt} onClick={handleNavLogin}>Already Have an account!</Typography>
+                
+                    {/* <Typography className={styles.registerSubTxt}>Sign up with</Typography> */}
                 </div>
 
-                <div className={styles.socialContainer}>
+                {/* <div className={styles.socialContainer}>
                     <img src={GoogleImg} alt="google" className={styles.socialBtn} onClick={handleGoogleAuth}/>
                     <img src={AppleImg} alt="google" className={styles.socialBtn} onClick={handleAppleAuth}/>
                     <img src={FbImg} alt="google" className={styles.socialBtn} onClick={handleFbAuth}/>
                 </div>
 
-                <Typography className={styles.orTxt}>OR</Typography>
+                <Typography className={styles.orTxt}>OR</Typography> */}
 
                 <Formik  
                     initialValues={REGISTER_DETAILS.initialValue}
@@ -126,6 +135,12 @@ function Register(){
                                    Login Details
                                 </Typography>
                                 <OutlinedInput
+                                    sx={{
+                                        "& input:-webkit-autofill": {
+                                            WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                                            backgroundColor: "transparent !important",
+                                        },
+                                    }}                                   
                                     type="email"
                                     className={styles.input}
                                     placeholder="Email *"
@@ -147,6 +162,7 @@ function Register(){
                                     className={styles.input}
                                     placeholder="Password *"
                                     onInput={(e) => {
+                                        setPassword(e.target.value)
                                         setFieldValue("password", e.target.value);
                                     }}
                                     value={values.password}
@@ -157,12 +173,48 @@ function Register(){
                                         maxLength: "26",
                                     }}
                                 />
-                                <FormHelperText className={styles.error}>
+                                {/* <FormHelperText className={styles.error}>
                                     {errors?.password && touched?.password && errors?.password}
-                                </FormHelperText>
-                                <Typography className={styles.passwordHelpTxt}>
-                                    Minimum 8 characters with at least one uppercase, one lowercase, one special character and a number
+                                </FormHelperText> */}
+                                {validationRules.map((rule, index) => (
+                                <Typography
+                                    className={styles.passwordHelpTxt}
+                                    key={index}
+                                    style={{
+                                        // eslint-disable-next-line no-nested-ternary
+                                        marginTop:"5px",
+                                        color: checkValidation(rule)
+                                        ? "green"
+                                        : errors.password
+                                        ? "red"
+                                        : "#000",
+                                        fontWeight: checkValidation(rule) ? "bold" : "normal",
+                                    }}
+                                    >
+                                    {rule.text}
                                 </Typography>
+                                ))}
+                            </FormControl>
+
+                            <FormControl>
+                                <OutlinedInput
+                                    type="confirmPassword"
+                                    className={styles.input}
+                                    placeholder="Confirm Password *"
+                                    onInput={(e) => {
+                                        setFieldValue("comfirmPassword", e.target.value);
+                                    }}
+                                    value={values.confirmPassword}
+                                    name="confirmPassword"
+                                    onBlur={handleBlur}
+                                    error={errors?.confirmPpassword && touched?.confirmPassword}
+                                    inputProps={{
+                                        maxLength: "26",
+                                    }}
+                                />
+                                <FormHelperText className={styles.error}>
+                                    {errors?.confirmPassword && touched?.confirmPassword && errors?.confirmPassword}
+                                </FormHelperText>
                             </FormControl>
 
                             <div className={styles.registerBtn} onClick={!loading ? handleSubmit : null}>
@@ -179,7 +231,6 @@ function Register(){
             <div className={styles.clubContainer}>
                 <JoinCard />
             </div>
-            
         </div>
     )
 }
