@@ -6,6 +6,7 @@
     justify-content: space-around;
     margin-top: 2rem;
     gap: 24px;
+    
 
     @media screen and (max-width: 768px) {
         @include flexCol;
@@ -21,20 +22,21 @@
             flex-shrink: 0;
             align-self: stretch;
         }
-        
-       
 
         .registerTxt{
             color: var(--Dark-Gray, #232321);
-            font-family: RubikSemiBold;
+            font-family: "RubikSemiBold";
             font-size: 36px;
         }
 
         .registerSubTxt{
             color: var(--Dark-Gray, #232321);
             font-family: "SansRegular";
-            font-size: 20px;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
         }
+
 
         .orTxt{
             margin-bottom: 1rem;
@@ -71,19 +73,20 @@
 
             .label{
                 color: var(--Dark-Gray, #232321);
-                font-family: RubikSemiBold;
+                font-family: "RubikSemiBold";
                 font-size: 24px;
                 margin-bottom: 1rem;
             }
+            
             .input{
                 border-radius: 8px;
                 border: 1px solid var(--Dark-Gray, #232321);
                 height: 48px;
-                width: 100%;
+                width: 440px;
 
-                @media screen and (max-width: 768px) {
-                    width: 100%;
-                }
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
+                    }
             }
 
             .passwordHelpTxt{

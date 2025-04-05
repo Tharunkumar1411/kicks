@@ -1,4 +1,4 @@
-import {object, string } from "yup";
+import {object, ref, string } from "yup";
 
 export const NavItems = ["New Drops 🔥", "Men", "Women"]
 
@@ -42,7 +42,8 @@ export const REGISTER_DETAILS = {
       lastName: "",
       email: "",
       gender: "Male",
-      password: ""
+      password: "",
+      confirmpassword: ""
     },
     validationSchema: object().shape({
       email: string().required("Required").email("Invalid Email").nullable(),
@@ -51,7 +52,22 @@ export const REGISTER_DETAILS = {
       gender: string().required("Required").nullable(),
       password: string()
       .required("Required")
-      .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Invalid Password")
+      .matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@_!#$%^&*()<>?/|}{~:])[A-Za-z\d@_!#$%^&*()<>?/|}{~:]{8,}$/, "Invalid Password")
       .nullable(),
+      confirmpassword: string().required("Required").oneOf(
+        [ref("password")],
+        'Must match the "New Password" field value'
+      ),
     }),
 };
+
+export const validationRules = [
+  { text: "Minimum 8 characters", regex: /.{8,}/ },
+  { text: "At least one uppercase letter (A-Z)", regex: /[A-Z]/ },
+  { text: "At least one lowercase letter (a-z)", regex: /[a-z]/ },
+  { text: "At least one number (0-9)", regex: /[0-9]/ },
+  {
+    text: "At least one special character (e.g., @, #, $, / etc.)",
+    regex: /[@_!#$%^&*()<>?/|]/,
+  },
+];

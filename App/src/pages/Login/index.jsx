@@ -38,7 +38,7 @@ function Login(){
     }
 
     const handleNavRegister = () => {
-        nav(`/register`);
+        nav(ROUTES.REGISTER);
     }
 
     return(
@@ -107,11 +107,11 @@ function Login(){
                                 {loading ? <CircularProgress className={styles.circleLoader}/> : <ArrowForwardIcon />}
                             </div>
 
-                            <div className={styles.socialContainer}>
+                            {/* <div className={styles.socialContainer}>
                                 <img src={GoogleImg} alt="google" className={styles.socialBtn} onClick={handleGoogleLogin}/>
                                 <img src={AppleImg} alt="google" className={styles.socialBtn} onClick={handleAppleAuth}/>
                                 <img src={FbImg} alt="google" className={styles.socialBtn} onClick={handleFbAuth}/> 
-                            </div>
+                            </div> */}
 
 
                         </form>
@@ -122,9 +122,8 @@ function Login(){
             <div className={styles.clubContainer}>
                 <JoinCard />
             </div>
-            
         </div>
     )
-}-0
+}
 
 export default Login;
