@@ -43,7 +43,7 @@ export const REGISTER_DETAILS = {
       email: "",
       gender: "Male",
       password: "",
-      confirmpassword: ""
+      confirmPassword: ""
     },
     validationSchema: object().shape({
       email: string().required("Required").email("Invalid Email").nullable(),
@@ -54,7 +54,7 @@ export const REGISTER_DETAILS = {
       .required("Required")
       .matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@_!#$%^&*()<>?/|}{~:])[A-Za-z\d@_!#$%^&*()<>?/|}{~:]{8,}$/, "Invalid Password")
       .nullable(),
-      confirmpassword: string().required("Required").oneOf(
+      confirmPassword: string().required("Required").oneOf(
         [ref("password")],
         'Must match the "New Password" field value'
       ),

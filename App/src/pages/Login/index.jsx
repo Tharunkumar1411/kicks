@@ -1,13 +1,10 @@
 import { CircularProgress, FormControl, FormHelperText, OutlinedInput, Typography } from "@mui/material";
 import styles from "./styles.module.scss"
 import { Formik } from "formik";
-import GoogleImg from "../../assets/images/GoogleIcon.svg"
-import AppleImg from "../../assets/images/AppleIcon.svg"
-import FbImg from "../../assets/images/FaceBookIcon.svg"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { LOGIN_DETAILS } from "../../utils/constants";
 import JoinCard from "../../components/JoinCard";
-import { handleAppleAuth, handleEmailAuth, handleFbAuth, handleGoogleAuth } from "../../utils/auth";
+import { handleGoogleAuth, handleLoginAuth } from "../../utils/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
@@ -20,7 +17,7 @@ function Login(){
         setLoading(prev => !prev);
 
         try {
-            const userDetails = await handleEmailAuth(values.email, values.password, "Login");
+            const userDetails = await handleLoginAuth(values.email, values.password, "Login");
             sessionStorage.setItem("Auth Token", userDetails?.user?.accessToken);
             nav(ROUTES.HOME);
         } catch (error) {

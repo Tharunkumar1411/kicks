@@ -1,16 +1,13 @@
 import { Box, Checkbox, CircularProgress, FormControl, FormControlLabel, FormHelperText, OutlinedInput, Typography } from "@mui/material";
 import styles from "./styles.module.scss"
 import { Formik } from "formik";
-import GoogleImg from "../../assets/images/GoogleIcon.svg"
-import AppleImg from "../../assets/images/AppleIcon.svg"
-import FbImg from "../../assets/images/FaceBookIcon.svg"
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { GENDERS, REGISTER_DETAILS, allowAlphabets, validationRules } from "../../utils/constants";
 import JoinCard from "../../components/JoinCard";
-import { handleAppleAuth, handleEmailAuth, handleFbAuth, handleGoogleAuth } from "../../utils/auth";
 import { useState } from "react";
 import { ROUTES } from "../../router/routes";
 import { useNavigate } from "react-router-dom";
+import { handleRegisterAuth } from "../../utils/auth";
 
 function Register(){
     const [loading, setLoading] = useState(false);
@@ -22,11 +19,13 @@ function Register(){
     };
 
     const handleRegister = async (values) => {
-        const result = await handleEmailAuth(values.email, values.password, values.firstName);
+        setLoading(true)
+        const result = await handleRegisterAuth(values.email, values.password, values.firstName);
         if(result){
             sessionStorage.setItem("Auth Token", result.user.accessToken);
             nav(ROUTES.HOME);
         }
+        setLoading(false);
     }
 
     const checkValidation = (rule) => rule.regex.test(password);
@@ -73,6 +72,12 @@ function Register(){
                                    Your Name
                                 </Typography>
                                 <OutlinedInput
+                                    sx={{
+                                        "& input:-webkit-autofill": {
+                                            WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                                            backgroundColor: "transparent !important",
+                                        },
+                                    }}  
                                     autoComplete="off"
                                     type="text"
                                     className={styles.input}
@@ -91,6 +96,12 @@ function Register(){
                             </FormControl>
                             <FormControl>
                                 <OutlinedInput
+                                    sx={{
+                                        "& input:-webkit-autofill": {
+                                            WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                                            backgroundColor: "transparent !important",
+                                        },
+                                    }}  
                                     type="text"
                                     className={styles.input}
                                     placeholder="Last Name *"
@@ -157,7 +168,13 @@ function Register(){
                                 />
                             </FormControl>
                             <FormControl>
-                                <OutlinedInput
+                                <OutlinedInput 
+                                    sx={{
+                                        "& input:-webkit-autofill": {
+                                            WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                                            backgroundColor: "transparent !important",
+                                        },
+                                    }} 
                                     type="password"
                                     className={styles.input}
                                     placeholder="Password *"
@@ -197,17 +214,23 @@ function Register(){
                             </FormControl>
 
                             <FormControl>
-                                <OutlinedInput
-                                    type="confirmPassword"
+                                <OutlinedInput 
+                                    sx={{
+                                        "& input:-webkit-autofill": {
+                                            WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                                            backgroundColor: "transparent !important",
+                                        },
+                                    }} 
+                                    type="password"
                                     className={styles.input}
                                     placeholder="Confirm Password *"
                                     onInput={(e) => {
-                                        setFieldValue("comfirmPassword", e.target.value);
+                                        setFieldValue("confirmPassword", e.target.value);
                                     }}
                                     value={values.confirmPassword}
                                     name="confirmPassword"
                                     onBlur={handleBlur}
-                                    error={errors?.confirmPpassword && touched?.confirmPassword}
+                                    error={errors?.confirmPassword && touched?.confirmPassword}
                                     inputProps={{
                                         maxLength: "26",
                                     }}
@@ -220,9 +243,14 @@ function Register(){
                             <div className={styles.registerBtn} onClick={!loading ? handleSubmit : null}>
                                 <Typography>REGISTER</Typography>
                                 {loading ? <CircularProgress className={styles.circleLoader}/> : <ArrowForwardIcon />}
-                             
+                               
                             </div>
-
+                            {console.log(errors)}
+                            {!!Object.keys(errors).length && 
+                                <FormHelperText style={{color:"red"}}>
+                                    Enter required details
+                                </FormHelperText>
+                            }
                         </form>
                     )}
                 </Formik>

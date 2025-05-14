@@ -55,8 +55,7 @@ export const handleFbAuth = () => {
 }
 
 
-export const handleEmailAuth = async(email, password, displayName = "", type = "",) => {
-  if(type === "Login"){
+export const handleLoginAuth = async(email, password) => {
     return await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       return userCredential
@@ -65,20 +64,21 @@ export const handleEmailAuth = async(email, password, displayName = "", type = "
       const errorCode = error.code;
       const errorMessage = error.message;
     });
-  } else{
-    return await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Update the display name
-        return updateProfile(userCredential.user, {
-          displayName: displayName
-        }).then(() => {
-          return userCredential;
-        });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // Handle errors here
+}
+
+export const handleRegisterAuth = async (email, password, displayName = "") => {
+  return await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Update the display name
+      return updateProfile(userCredential.user, {
+        displayName: displayName
+      }).then(() => {
+        return userCredential;
       });
-    }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // Handle errors here
+    });
 }
