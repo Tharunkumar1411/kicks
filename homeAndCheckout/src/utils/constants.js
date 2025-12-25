@@ -70,3 +70,8 @@ export const CHECKOUT_DETAILS = {
 };
 
 export const REGX_FORMET_AMOUNT = /\B(?=(?:(\d\d)+(\d)(?!\d))+(?!\d))/g;
+
+export const ENV_MODE = {
+  DEVELOPMENT: "development",
+  PRODUCTION: "production"
+}

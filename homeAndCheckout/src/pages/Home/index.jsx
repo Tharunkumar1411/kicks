@@ -15,12 +15,26 @@ import Loader from "../../components/Loader";
 import useHomeStore from "../../store/home";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
+import useImagePreload from "../../hooks/useImagePreload";
+import ImageWithSkeleton from "../../components/ImageWithSkelton";
 
 const Home = () => {
     const carouselRef = useRef(null);
     const setHomeDetails = useHomeStore((state) => state.setHomeDetails);
     const homeDetails = useHomeStore((state) => state.homeDetails);
     const nav = useNavigate();
+
+    const {
+        homeBannerUrl,
+        previewUrlOne,
+        previewUrlTwo,
+    } = homeDetails?.topBanner || {};
+
+    const isLoaded = useImagePreload([
+        homeBannerUrl,
+        previewUrlOne,
+        previewUrlTwo,
+    ]);
 
     const handleNext = () => {
       if (carouselRef.current) {
@@ -43,21 +57,41 @@ const Home = () => {
     return (
         <Suspense fallback={<Loader />}>
             <div>
-                <div className={styles.bannerContainer} style={{backgroundImage: `url(${homeDetails?.topBanner?.homeBannerUrl})`}}>
+               <div className={`${styles.bannerContainer}`}>
+                <ImageWithSkeleton
+                    src={homeBannerUrl}
+                    alt="Hero banner"
+                    className={styles.bannerImage}
+                    isBackground={true}
+                />
+               
+                <div className={styles.bannerContentContainer}>
+                    <div className={styles.bannerContent}>
+                        <Typography className={styles.header}>
+                            {homeDetails?.topBanner?.productName}
+                        </Typography>
+                        <span className={styles.subHeader}>
+                            {homeDetails?.topBanner?.description}
+                        </span>
+                        <button className={styles.button}>SHOP NOW</button>
+                    </div>
 
-                    <div className={styles.bannerContentContainer}>
-                        <div className={styles.bannerContent}>
-                            <Typography className={styles.header}>{homeDetails?.topBanner?.productName}</Typography>
-                            <span className={styles.subHeader}>{homeDetails?.topBanner?.description}</span>
-                            <button className={styles.button}>SHOP NOW</button>
-                        </div>
+                    <div className={styles.previewBannerContainer}>
+                        <ImageWithSkeleton
+                            src={previewUrlOne}
+                            alt="Hero banner"
+                            className={styles.previewOne}
+                        />
 
-                        <div className={styles.previewBannerContainer}>
-                            <div className={styles.previewOne} style={{backgroundImage: `url(${homeDetails?.topBanner?.previewUrlOne})`}}/>
-                            <div className={styles.previewTwo} style={{backgroundImage: `url(${homeDetails?.topBanner?.previewUrlTwo})`}}/>
-                        </div>
+                        <ImageWithSkeleton
+                            src={previewUrlTwo}
+                            alt="Hero banne"
+                            className={styles.previewTwo}
+                        />
                     </div>
                 </div>
+                </div>
+
                 
                 <div className={styles.newDropContainer}>
                     <div className={styles.dropContent}>

@@ -2,14 +2,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
+const { ENV_MODE } = require("./src/utils/constants");
 const deps = require("./package.json").dependencies;
 
 module.exports = (_, argv) => ({
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: 'https://kicks-home.vercel.app/',
-    // publicPath: 'http://localhost:8080/'
+    publicPath: argv.mode === ENV_MODE.DEVELOPMENT ? 'http://localhost:8080/' : 'https://kicks-home.vercel.app/',
   },
 
   resolve: {

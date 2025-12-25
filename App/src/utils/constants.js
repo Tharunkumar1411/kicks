@@ -71,3 +71,8 @@ export const validationRules = [
     regex: /[@_!#$%^&*()<>?/|]/,
   },
 ];
+
+export const ENV_MODE = {
+  DEVELOPMENT: "development",
+  PRODUCTION: "production"
+}

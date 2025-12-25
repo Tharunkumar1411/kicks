@@ -3,13 +3,13 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const deps = require("./package.json").dependencies;
 const path = require("path");
+const { ENV_MODE } = require("./src/utils/constants");
 
-module.exports = () => ({
+module.exports = (_, argv) => ({
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: "https://kicks-app-two.vercel.app/", // Ensure the public path matches the parent app's address
-    // publicPath: "http://localhost:8081/"
+    publicPath: argv.mode === ENV_MODE.DEVELOPMENT ? "http://localhost:8081/" : "https://kicks-app-two.vercel.app/", // Ensure the public path matches the parent app's address
   },
 
   resolve: {
@@ -52,7 +52,7 @@ module.exports = () => ({
     new ModuleFederationPlugin({
       name: "parentApp", // Name of the parent app
       remotes: {
-        home: "home@https://kicks-home.vercel.app/home-app.js", // Reference your deployed microfrontend
+        home: argv.mode === ENV_MODE.DEVELOPMENT ? "home@http://localhost:8080/home-app.js" : "home@https://kicks-home.vercel.app/home-app.js", // Reference your deployed microfrontend
       },
       shared: {
         ...deps,
