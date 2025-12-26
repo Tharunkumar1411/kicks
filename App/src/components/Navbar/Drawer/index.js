@@ -8,8 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { NavItems } from '../../../utils/constants';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function NavDrawer({open, setOpen}) {
-
+export default function NavDrawer({ open, setOpen }) {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -20,10 +19,17 @@ export default function NavDrawer({open, setOpen}) {
         {NavItems.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"100%"}}>
-                    <ListItemText primary={text} />
-                    <AddIcon fontSize='small'/>
-                </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                }}
+              >
+                <ListItemText primary={text} />
+                <AddIcon fontSize="small" />
+              </div>
             </ListItemButton>
           </ListItem>
         ))}

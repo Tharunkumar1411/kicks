@@ -1,18 +1,22 @@
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
-const deps = require("./package.json").dependencies;
-const path = require("path");
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const deps = require('./package.json').dependencies;
+const path = require('path');
+const { ENV_MODE } = require('./src/utils/constants');
 
-module.exports = () => ({
+module.exports = (_, argv) => ({
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: "https://kicks-app-two.vercel.app/",
+    publicPath:
+      argv.mode === ENV_MODE.DEVELOPMENT
+        ? 'http://localhost:8081/'
+        : 'https://kicks-app-two.vercel.app/', // Ensure the public path matches the parent app's address
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".scss"],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json', '.scss'],
   },
 
   devServer: {
@@ -24,34 +28,37 @@ module.exports = () => ({
     rules: [
       {
         test: /\.m?js/,
-        type: "javascript/auto",
+        type: 'javascript/auto',
         resolve: {
           fullySpecified: false,
         },
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.(gif|svg|jpg|png|jpeg)$/,
         loader: 'file-loader',
-      }
+      },
     ],
   },
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "parentApp", // Name of the parent app
+      name: 'parentApp', // Name of the parent app
       remotes: {
-        home: "home@https://kicks-home.vercel.app/home-app.js", // Reference your deployed microfrontend
+        home:
+          argv.mode === ENV_MODE.DEVELOPMENT
+            ? 'home@http://localhost:8080/home-app.js'
+            : 'home@https://kicks-home.vercel.app/home-app.js', // Reference your deployed microfrontend
       },
       shared: {
         ...deps,
@@ -59,14 +66,14 @@ module.exports = () => ({
           singleton: true,
           requiredVersion: deps.react,
         },
-        "react-dom": {
+        'react-dom': {
           singleton: true,
-          requiredVersion: deps["react-dom"],
+          requiredVersion: deps['react-dom'],
         },
       },
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
     new Dotenv(),
   ],

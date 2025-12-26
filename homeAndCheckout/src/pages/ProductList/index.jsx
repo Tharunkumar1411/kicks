@@ -73,14 +73,14 @@ export default function ProductList(){
                 </div>
 
                 <div className={styles.filterBtnContainer}>
-                    {isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
+                    {/* {isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>} */}
                     {isMobile && <button onClick={handleFilter} className={styles.categoryBtn}>Filter <FilterListIcon /></button>}
                 </div>
 
                 <div className={styles.catergoryContainer}>
                 
                     <Typography className={styles.category}>Life Style Shoes <label className={styles.label}>122 item</label></Typography>
-                    <div style={{display:"flex", flexDirection:"column", gap:"20px"}}>
+                    {/* <div style={{display:"flex", flexDirection:"column", gap:"20px"}}>
                         {!isMobile && <button onClick={handleCateogry} className={styles.categoryBtn}>{category} <KeyboardArrowDownIcon /></button>}
                         
                         {showMenu &&
@@ -92,7 +92,7 @@ export default function ProductList(){
                                 </div>
                             </div>
                         }
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className={styles.filterContainer}>

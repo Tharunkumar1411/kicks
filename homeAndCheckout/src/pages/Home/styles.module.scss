@@ -1,358 +1,363 @@
-@import "../../styles/mixins.scss";
+@import '../../styles/mixins.scss';
 
-.heading{
-    color: var(--Dark-Gray, #232321);
-    font-family: RubikSemiBold;
-    font-size: 223.5px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-    text-align: center;
+.heading {
+  color: var(--Dark-Gray, #232321);
+  font-family: RubikSemiBold;
+  font-size: 223.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    font-size: 60px;
+  }
+}
+
+.spanHeader {
+  color: var(--Blue, #4a69e2);
+}
+
+.bannerContainer {
+  height: 750px;
+  // border-radius: 1rem;
+  display: flex;
+  align-items: end;
+  // margin: 20px;
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
+
+  position: relative;
+  overflow: hidden;
+
+  &.loading {
+    @include skeleton;
+  }
+
+  .bannerImage {
+    position: absolute;
+    inset: 0;
     width: 100%;
-
-
-    @media screen and (max-width: 768px) {
-        font-size: 60px;
-    }
-}
-
-.spanHeader{
-    color: var(--Blue, #4A69E2);
-}
-
-.bannerContainer{
-    height: 750px;
-    border-radius: 1rem;
-    display: flex;
-    align-items: end;
-    margin: 20px;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    @media screen and (max-width: 768px) {
-        height: 382px;
-    }
+  }
 
-    .bannerContentContainer{
-        @include flexRow;
-        justify-content: space-between;
-        width: 100%;
-        margin: 1rem;
+  @media screen and (max-width: 768px) {
+    height: 382px;
+  }
 
-        .bannerContent{
-            @include flexCol;
-            justify-content: end;
-            color: #fff;
+  .bannerContentContainer {
+    @include flexRow;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem;
+    position: relative;
+    z-index: 1;
 
-            .header{
-                color: var(--White, #FFF);
-                font-family: RubikSemiBold;
-                font-size: 74px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
+    .bannerContent {
+      @include flexCol;
+      justify-content: end;
+      color: #fff;
 
-                @media screen and (max-width: 768px) {
-                    font-size: 24px;
-                }
-            }
+      .header {
+        color: var(--White, #fff);
+        font-family: RubikSemiBold;
+        font-size: 74px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
 
-            .subHeader{
-                color: var(--Gray, #E7E7E3);
-                font-family: SansSemiBold;
-                font-size: 24px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-
-              
-            }
-        }
-
-        .button{
-            width: fit-content;
-            padding: 0.5rem 1rem;
-            background-color: rgba(74, 105, 226, 1);
-            border: none;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            color: #fff;
-            font-family: RubikSemiBold;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            letter-spacing: 0.25px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .previewBannerContainer{
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            justify-content: end;
-            .previewOne{
-                width: 160px;
-                height: 160px;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                
-                @media screen and (max-width: 768px) {
-                    width: 64px;
-                    height: 64px;
-                }
-                
-            }
-
-            .previewTwo{
-                width: 160px;
-                height: 160px;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                
-                @media screen and (max-width: 768px) {
-                    width: 64px;
-                    height: 64px;
-                }
-            }
-        }
-    }
-}
-
-.newDropContainer{
-    @include flexCol;
-    gap: 1rem;
-
-    .dropContent{
-        @include flexRow;
-        justify-content: space-between;
-        align-items: end;
-        
-               
-        .header{
-            color: var(--Dark-Gray, #232321);
-            font-family: RubikSemiBold;
-            font-size: 48px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 95%;
-            text-transform: uppercase;
-            margin: 20px;
-            
-            @media screen and (max-width: 768px) {
-                font-size: 24px;
-            }
-        }
-
-        .button{
-            width: fit-content;
-            height: 48px;
-            padding: 0.5rem 1rem;
-            background-color: rgba(74, 105, 226, 1);
-            border: none;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            color: #fff;
-            font-family: RubikSemiBold;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            letter-spacing: 0.25px;
-            margin: 20px;
-            text-transform: uppercase;
-            cursor: pointer;
-            @media screen and (max-width: 768px) {
-                display: flex;
-                height: 40px;
-                padding: 8px 16px;
-                justify-content: center;
-                align-items: center;
-                gap: 4px;
-                align-self: stretch;
-                font-family: RubikSemiBold;
-            }
-        }
-
-    }
-
-    .reviewRootContainer{
-        @include flexRow;
-        justify-content: space-around;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin: 20px;
-        
         @media screen and (max-width: 768px) {
-            @include flexCol;
-            gap: 20px;
+          font-size: 24px;
         }
+      }
+
+      .subHeader {
+        color: var(--Gray, #e7e7e3);
+        font-family: SansSemiBold;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
     }
+
+    .button {
+      width: fit-content;
+      padding: 0.5rem 1rem;
+      background-color: rgba(74, 105, 226, 1);
+      border: none;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+      color: #fff;
+      font-family: RubikSemiBold;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0.25px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .previewBannerContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      justify-content: end;
+
+      .previewOne {
+        width: 160px;
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        @media screen and (max-width: 768px) {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      .previewTwo {
+        @extend .previewOne;
+      }
+    }
+  }
 }
 
+.newDropContainer {
+  @include flexCol;
+  gap: 1rem;
 
-.categoryRoot{
-    background-color: #000;
-    padding: 32px 0 0 32px;
+  .dropContent {
+    @include flexRow;
+    justify-content: space-between;
+    align-items: end;
 
-    .headerContainer {
+    .header {
+      color: var(--Dark-Gray, #232321);
+      font-family: RubikSemiBold;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 95%;
+      text-transform: uppercase;
+      margin: 20px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+
+    .button {
+      width: fit-content;
+      height: 48px;
+      padding: 0.5rem 1rem;
+      background-color: rgba(74, 105, 226, 1);
+      border: none;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+      color: #fff;
+      font-family: RubikSemiBold;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 0.25px;
+      margin: 20px;
+      text-transform: uppercase;
+      cursor: pointer;
+      @media screen and (max-width: 768px) {
         display: flex;
-        justify-content: space-between;
+        height: 40px;
+        padding: 8px 16px;
+        justify-content: center;
         align-items: center;
-        padding: 10px;
-
-        .header {
-            color: var(--White, #FFF);
-            font-family: RubikSemiBold;
-            font-size: 74px;
-            font-style: normal;
-            font-weight: 600;
-            text-transform: uppercase;
-            @media screen and (max-width: 768px) {
-                font-size: 24px;
-            }
-        }
-
-        .buttonGroup {
-            display: flex;
-            .arrowBtn {
-                width: 16px;
-                height: 16px;
-                padding: 8px 12px;
-                cursor: pointer;
-                font-size: 24px;
-                margin-left: 10px;
-                border-radius: 8px;
-                background: var(--Gray, #E7E7E3);
-            }
-        }
+        gap: 4px;
+        align-self: stretch;
+        font-family: RubikSemiBold;
+      }
     }
-     
-    .categoryContainer{
-        background-color: white;
-        border-top-left-radius: 40px;
-        .categoryImg{
-            width: 100%;
-            height: 600px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: end;
+  }
 
-            @media screen and (max-width: 768px) {
-                height: 250px;
-            }
+  .reviewRootContainer {
+    @include flexRow;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px;
 
-            .categoryTitle{
-                .title{
-                    color: var(--Dark-Gray, #232321);
-                    font-family: RubikSemiBold;
-                    font-size: 36px;
-                    font-style: normal;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    margin-left: 20px;
-
-                    @media screen and (max-width: 768px) {
-                        font-size: 24px;
-                    }
-                }
-            }
-
-            .categoryLink{
-                margin: 20px;
-                padding: 8px;
-                background-color: #000;
-                border-radius: 10px;
-                .arrowLink{
-                    width: 32px;
-                    height: 32px;
-                    color: #fff;
-                    @media screen and (max-width: 768px) {
-                        width: 16px;
-                        height: 16px;
-                    }
-                }
-            }
-        }
+    @media screen and (max-width: 768px) {
+      @include flexCol;
+      gap: 20px;
     }
+  }
 }
 
+.categoryRoot {
+  background-color: #000;
+  padding: 32px 0 0 32px;
 
-.bannerTxt{
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    .header {
+      color: var(--White, #fff);
+      font-family: RubikSemiBold;
+      font-size: 74px;
+      font-style: normal;
+      font-weight: 600;
+      text-transform: uppercase;
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+
+    .buttonGroup {
+      display: flex;
+      .arrowBtn {
+        width: 16px;
+        height: 16px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 24px;
+        margin-left: 10px;
+        border-radius: 8px;
+        background: var(--Gray, #e7e7e3);
+      }
+    }
+  }
+
+  .categoryContainer {
+    background-color: white;
+    border-top-left-radius: 40px;
+    .categoryImg {
+      width: 100%;
+      height: 600px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: end;
+
+      @media screen and (max-width: 768px) {
+        height: 250px;
+      }
+
+      .categoryTitle {
+        .title {
+          color: var(--Dark-Gray, #232321);
+          font-family: RubikSemiBold;
+          font-size: 36px;
+          font-style: normal;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-left: 20px;
+
+          @media screen and (max-width: 768px) {
+            font-size: 24px;
+          }
+        }
+      }
+
+      .categoryLink {
+        margin: 20px;
+        padding: 8px;
+        background-color: #000;
+        border-radius: 10px;
+        .arrowLink {
+          width: 32px;
+          height: 32px;
+          color: #fff;
+          @media screen and (max-width: 768px) {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 
-.reviewContainer{
-    @include flexCol;
-    background-color: #000;
-    .headerContainer{
-        @include flexRow;
-        justify-content: space-between;
+.bannerTxt {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.reviewContainer {
+  @include flexCol;
+  background-color: #000;
+  .headerContainer {
+    @include flexRow;
+    justify-content: space-between;
+    align-items: end;
+    padding: 40px 30px;
+    .header {
+      font-family: RubikSemiBold;
+      font-size: 74px;
+      font-weight: 600;
+      text-align: left;
+      color: #fff;
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+        display: flex;
         align-items: end;
-        padding: 40px 30px;
-        .header{
-            font-family: RubikSemiBold;
-            font-size: 74px;
-            font-weight: 600;
-            text-align: left;
-            color: #fff;
-            @media screen and (max-width: 768px) {
-                font-size: 24px;
-                display: flex;
-                align-items: end;
-            }
-        }
-        .buttonGroup{
-            @include flexRow;
-            gap: 10px;
-            align-items: end;
-            .arrowBtn{
-                border: 1px solid grey;
-                background-color: #fff;
-                font-size: 20px;
-                border-radius: 8px;
-                display: flex;
-                height: 40px;
-                padding: 8px 12px;
-                justify-content: center;
-                align-items: center;
-                gap: 4px;
-
-                @media screen and (max-width: 768px) {
-                    font-size: 10px;
-                    height: 20px;
-                }
-            }
-        }
+      }
     }
+    .buttonGroup {
+      @include flexRow;
+      gap: 10px;
+      align-items: end;
+      .arrowBtn {
+        border: 1px solid grey;
+        background-color: #fff;
+        font-size: 20px;
+        border-radius: 8px;
+        display: flex;
+        height: 40px;
+        padding: 8px 12px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
 
-    .slideContainer {
-        @include flexRow;
-        margin-left: 30px;
-        background-color: white;
-
-        .carouselItem{
-            padding: 0px 64px;
-            background-repeat: no-repeat;
-            background-position: cover;
-            border: 1px solid black;
-            background-size: contain;
-            margin-left: auto;
-            margin-right: auto;
-            width: 480px;
-            height: 600px;
+        @media screen and (max-width: 768px) {
+          font-size: 10px;
+          height: 20px;
         }
+      }
     }
+  }
+
+  .slideContainer {
+    @include flexRow;
+    margin-left: 30px;
+    background-color: white;
+
+    .carouselItem {
+      padding: 0px 64px;
+      background-repeat: no-repeat;
+      background-position: cover;
+      border: 1px solid black;
+      background-size: contain;
+      margin-left: auto;
+      margin-right: auto;
+      width: 480px;
+      height: 600px;
+    }
+  }
 }

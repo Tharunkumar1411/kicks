@@ -1,187 +1,185 @@
-@import "../../styles/mixins.scss";
+@import '../../styles/mixins.scss';
 
-.footerRootContainer{
-    overflow: hidden;
-    background-color: #4A69E2;
-    border-radius: 48px;
-    margin: 20px;
+.footerRootContainer {
+  overflow: hidden;
+  background-color: #4a69e2;
+  border-radius: 48px;
+  margin: 20px;
 
-    .topContainer{
-        @include flexRow;
-        justify-content: space-between;
-        padding: 20px;
+  .topContainer {
+    @include flexRow;
+    justify-content: space-between;
+    padding: 20px;
+
+    @media screen and (max-width: 768px) {
+      @include flexCol;
+      gap: 32px;
+    }
+
+    .grid1 {
+      @include flexCol;
+      gap: 32px;
+
+      .clubTxt {
+        font-family: RubikSemiBold;
+        font-size: 48px;
+        color: #ffffff;
+        line-height: 56.88px;
+        width: fit-content;
 
         @media screen and (max-width: 768px) {
-            @include flexCol;
-            gap: 32px;
+          font-size: 32px;
+          line-height: 37.92px;
+          width: fit-content;
         }
-        
-        .grid1{
-            @include flexCol;
-            gap: 32px;
+      }
 
-            .clubTxt{
-                font-family: RubikSemiBold;
-                font-size: 48px;
-                color: #FFFFFF;
-                line-height: 56.88px;
-                width: fit-content;
+      .clubSubTxt {
+        font-family: RubikRegular;
+        font-size: 20px;
+        color: #ffffff;
+        line-height: 27.24px;
 
-                @media screen and (max-width: 768px) {
-                   font-size: 32px;
-                   line-height: 37.92px;
-                   width: fit-content;
-                }
-                
-            }
+        @media screen and (max-width: 768px) {
+          font-size: 16px;
+          line-height: 21.79px;
+        }
+      }
 
-            .clubSubTxt{
-                font-family: RubikRegular;
-                font-size: 20px;
-                color: #FFFFFF;
-                line-height: 27.24px;
+      .emailBlock {
+        @include flexRow;
+        gap: 10px;
+        flex-wrap: wrap;
 
-                @media screen and (max-width: 768px) {
-                    font-size: 16px;
-                    line-height: 21.79px;
-                }
-            }
-
-            .emailBlock{
-                @include flexRow;
-                gap: 10px;
-                flex-wrap: wrap;
-
-                .submitBtn{
-                    border-radius: 8px;
-                    background: #232321;
-                    padding: 8px 24px 8px 24px;
-                    color: #FFFFFF;
-                    font-size: 14px;
-                    letter-spacing: 0.25px;
-                    font-family: RubikRegular;
-                }
-
-                .inputField{
-                    border: 1px solid #FFFFFF;
-                    border-radius: 8px;
-                    padding: 10px 16px 10px 16px;
-                    outline: none;
-                    background: transparent;
-                    color: #FFFFFF;
-                }
-
-                ::placeholder {
-                    color: #FFFFFF;
-                }
-            }
+        .submitBtn {
+          border-radius: 8px;
+          background: #232321;
+          padding: 8px 24px 8px 24px;
+          color: #ffffff;
+          font-size: 14px;
+          letter-spacing: 0.25px;
+          font-family: RubikRegular;
         }
 
-        .grid2{
-            display: flex;
-            margin-right: 180px;
-            
-            .logoImg{
-                width: 351px;
-                @media screen and (max-width: 768px) {
-                    width: 200px;
-                }
-            }
+        .inputField {
+          border: 1px solid #ffffff;
+          border-radius: 8px;
+          padding: 10px 16px 10px 16px;
+          outline: none;
+          background: transparent;
+          color: #ffffff;
         }
+
+        ::placeholder {
+          color: #ffffff;
+        }
+      }
     }
 
-    .bottomContainer{
-        background-color: #000000;
-        color: #FFFFFF;
-        border-radius: 48px;
-        .grid1{
-            @include flexRow;
-            justify-content: space-between;
-            padding: 2rem;
+    .grid2 {
+      display: flex;
+      margin-right: 180px;
 
-            @media screen and (max-width: 768px) {
-                @include flexCol;
-                gap: 24px;
-            }
-
-            .fragment{
-                @include flexCol;
-
-                .menuHeader{
-                    font-family: RubikSemiBold !important;
-                    color: #FFA52F;
-                    font-size: 24px;
-                }
-
-                .aboutTxt{
-                    width: fit-content;
-                    font-family: SansRegular !important;
-                    line-height: 27.24px;
-
-                    @media screen and (max-width: 768px) {
-                        width: fit-content;
-                        font-size: 16px;
-                    }
-                }
-
-                .catMenu{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 3px;
-                    text-decoration: none;
-                }
-
-                .catMenu > * {
-                    font-family: SansRegular !important;
-                    line-height: 27.24px;
-                }
-
-                .compMenu > * {
-                    font-family: SansRegular !important;
-                    line-height: 27.24px;
-                }
-
-                .socialMenu{
-                    @include flexRow;
-                    gap: 24px;
-                }
-                
-            }
+      .logoImg {
+        width: 351px;
+        @media screen and (max-width: 768px) {
+          width: 200px;
         }
-
-        .bottomLogoContainer{
-            display: flex;
-            justify-content: center;
-            position: relative;
-            bottom: -7rem;
-
-            @media screen and (max-width: 480px) {
-                bottom: -2rem;
-            }
-
-            @media screen and (max-width: 768px) {
-                bottom: -2rem;
-            }
-
-            .bottomLogo{
-                display: flex;
-                width: 1262px;
-                justify-content: center;
-                align-items: center;
-                flex-shrink: 0;
-               
-                @media screen and (max-width: 1024px) {
-                    width: 90%; 
-                }
-                
-                @media screen and (max-width: 768px) {
-                    width: 100%;
-                }
-                
-                @media screen and (max-width: 480px) {
-                    width: 100%;
-                }
-            }
-        }
+      }
     }
+  }
+
+  .bottomContainer {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 48px;
+    .grid1 {
+      @include flexRow;
+      justify-content: space-between;
+      padding: 2rem;
+
+      @media screen and (max-width: 768px) {
+        @include flexCol;
+        gap: 24px;
+      }
+
+      .fragment {
+        @include flexCol;
+
+        .menuHeader {
+          font-family: RubikSemiBold !important;
+          color: #ffa52f;
+          font-size: 24px;
+        }
+
+        .aboutTxt {
+          width: fit-content;
+          font-family: SansRegular !important;
+          line-height: 27.24px;
+
+          @media screen and (max-width: 768px) {
+            width: fit-content;
+            font-size: 16px;
+          }
+        }
+
+        .catMenu {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          text-decoration: none;
+        }
+
+        .catMenu > * {
+          font-family: SansRegular !important;
+          line-height: 27.24px;
+        }
+
+        .compMenu > * {
+          font-family: SansRegular !important;
+          line-height: 27.24px;
+        }
+
+        .socialMenu {
+          @include flexRow;
+          gap: 24px;
+        }
+      }
+    }
+
+    .bottomLogoContainer {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: -7rem;
+
+      @media screen and (max-width: 480px) {
+        bottom: -2rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        bottom: -2rem;
+      }
+
+      .bottomLogo {
+        display: flex;
+        width: 1262px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+
+        @media screen and (max-width: 1024px) {
+          width: 90%;
+        }
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
+
+        @media screen and (max-width: 480px) {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
