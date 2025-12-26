@@ -1,13 +1,13 @@
 .notFountContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-    .header {
-        text-align: center;
-        color: black;
-        line-height: 1px;
-    }
+  .header {
+    text-align: center;
+    color: black;
+    line-height: 1px;
+  }
 }

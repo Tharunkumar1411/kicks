@@ -1,114 +1,111 @@
+@import '../../styles/mixins.scss';
 
-@import "../../styles/mixins.scss";
+.rootContainer {
+  .label {
+    font-family: 'SansRegular';
+    font-size: 16px;
+    font-weight: 600;
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+  .header {
+    font-family: 'RubikSemiBold';
+    font-size: 32px;
+    font-weight: 600;
+  }
+  .input {
+    margin-top: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--Dark-Gray, #232321);
+    height: 48px;
+    padding: 10px;
+    width: 100%;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
 
-.rootContainer{
-    .label{
-        font-family: "SansRegular";
-        font-size: 16px;
-        font-weight: 600;
-        @media screen and (max-width: 768px) {
-            font-size: 12px;
-        }
+  .checkoutContainer {
+    @include flexRow;
+    gap: 20px;
+    margin: 20px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    @media screen and (max-width: 768px) {
+      @include flexCol;
     }
-    .header{
-        font-family: "RubikSemiBold";
-        font-size: 32px;
-        font-weight: 600;
-    }
-    .input{
-        margin-top: 16px;
-        border-radius: 8px;
-        border: 1px solid var(--Dark-Gray, #232321);
-        height: 48px;
-        padding: 10px;
+    .shipRootContainer {
+      @include flexCol;
+      width: 50%;
+      gap: 20px;
+      @media screen and (max-width: 768px) {
         width: 100%;
-        @media screen and (max-width: 768px) {
-            width: 100%;
-            flex-direction: column;
-        }
-    }
+      }
+      .contactContainer {
+      }
 
-    .checkoutContainer{
-        @include flexRow;
-        gap: 20px;
-        margin: 20px;
-        justify-content: space-between;
-        flex-direction: row-reverse;
-
-        @media screen and (max-width: 768px) {
-            @include flexCol;
-        }
-        .shipRootContainer{
-            @include flexCol;
-            width: 50%;
+      .shippingContainer {
+        .form {
+          .handleStyle {
+            @include flexRow;
             gap: 20px;
-            @media screen and (max-width: 768px) {
+            .input {
+              margin-top: 16px;
+              border-radius: 8px;
+              border: 1px solid var(--Dark-Gray, #232321);
+              height: 48px;
+              width: 100%;
+              @media screen and (max-width: 768px) {
                 width: 100%;
+                flex-direction: column;
+              }
             }
-            .contactContainer{
-            }
-    
-            .shippingContainer{
-                .form{
-                    .handleStyle{
-                        @include flexRow;
-                        gap: 20px;
-                        .input{
-                            margin-top: 16px;
-                            border-radius: 8px;
-                            border: 1px solid var(--Dark-Gray, #232321);
-                            height: 48px;
-                            width: 100%;
-                            @media screen and (max-width: 768px) {
-                                width: 100%;
-                                flex-direction: column;
-                            }
-                        }
-                    }
+          }
 
-                    .deliveryContainer{
-                        @include flexCol;
-                        gap: 20px;
-                        margin-top: 20px;
+          .deliveryContainer {
+            @include flexCol;
+            gap: 20px;
+            margin-top: 20px;
 
-                        .deliveryDetailsContainer{
-                            @include flexRow;
-                            justify-content: space-between;
-                            align-items: flex-start;
-                            border: 1px solid black;
-                            padding: 16px;
-                            border-radius: 15px;
+            .deliveryDetailsContainer {
+              @include flexRow;
+              justify-content: space-between;
+              align-items: flex-start;
+              border: 1px solid black;
+              padding: 16px;
+              border-radius: 15px;
 
-                            .header{
-                                font-family: "RubikSemiBold";
-                                font-size: 24px;
-                                font-weight: 600;
-                                @media screen and (max-width: 768px) {
-                                    font-size: 16px;
-                                }
-                            }
-
-                            .label{
-                                @media screen and (max-width: 768px) {
-                                    font-size: 14px;
-                                }
-                            }
-
-                            .amount{
-                                font-family: "RubikSemiBold";
-                                font-size: 20px;
-                                font-weight: 600;
-                                color: #4A69E2;
-                                @media screen and (max-width: 768px) {
-                                    font-size: 16px;
-                                }
-                            }
-                        }
-                    }
+              .header {
+                font-family: 'RubikSemiBold';
+                font-size: 24px;
+                font-weight: 600;
+                @media screen and (max-width: 768px) {
+                  font-size: 16px;
                 }
+              }
+
+              .label {
+                @media screen and (max-width: 768px) {
+                  font-size: 14px;
+                }
+              }
+
+              .amount {
+                font-family: 'RubikSemiBold';
+                font-size: 20px;
+                font-weight: 600;
+                color: #4a69e2;
+                @media screen and (max-width: 768px) {
+                  font-size: 16px;
+                }
+              }
             }
+          }
         }
-       
+      }
     }
-   
+  }
 }

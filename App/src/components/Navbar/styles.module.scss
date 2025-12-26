@@ -1,71 +1,70 @@
-@import "../../styles/mixins.scss";
+@import '../../styles/mixins.scss';
 
-.navRootContainer{
-    @include flexRow;
-    border-radius: 24px;
-    background: #FAFAFA;
-    border-radius: 24px;
-    padding: 15px;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px;
+.navRootContainer {
+  @include flexRow;
+  border-radius: 24px;
+  background: #fafafa;
+  border-radius: 24px;
+  padding: 15px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
 }
 
-.logo{
-    display: flex;
-    justify-content: center;
+.logo {
+  display: flex;
+  justify-content: center;
 }
 
-.navMenuItems{
-    @include flexRow;
-    gap: 40px;
+.navMenuItems {
+  @include flexRow;
+  gap: 40px;
 }
 
-.navProfileItems{
-    @include flexRow;
-    gap: 40px;
+.navProfileItems {
+  @include flexRow;
+  gap: 40px;
 }
 
-@media (max-width: 480px){
-    .navProfileItems{
-        gap: 9px;
-    }
+@media (max-width: 480px) {
+  .navProfileItems {
+    gap: 9px;
+  }
 }
 
-
-.rootMenuContainer{
-    margin-top: 20px;
-    z-index: 1;
-
+.rootMenuContainer {
+  margin-top: 20px;
+  z-index: 1;
 }
 
-.menuOption{
-   font-family: RubikSemiBold !important;
-   cursor: pointer;
+.menuOption {
+  font-family: RubikSemiBold !important;
+  cursor: pointer;
 }
 
-.dropMenu{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
+.dropMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.dropOption{
-    border: 1px solid #E7E7E3;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+.dropOption {
+  border: 1px solid #e7e7e3;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
 .animatedContainer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    padding: 1.25rem;
-    padding-top: 0;
-    background-color: #E7E7E3;
-    z-index: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 1.25rem;
+  padding-top: 0;
+  background-color: #e7e7e3;
+  z-index: 1;
 }
-  
