@@ -1,4 +1,3 @@
-import React from 'react';
 import { ToastContainer, Slide } from 'react-toastify';
 import AppRoutes from './router/AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
