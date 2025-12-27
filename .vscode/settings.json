@@ -1,25 +1,5 @@
 {
-  // Auto save
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-
-  // Use Prettier as default formatter
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-
-  // Format on save
-  "editor.formatOnSave": true,
-
-  // Ensure Prettier runs even with other formatters
-  "editor.formatOnPaste": true,
-  "editor.formatOnType": false,
-
-  // Prettier preferences
-  "prettier.singleQuote": true,
-  "prettier.semi": true,
-  "prettier.trailingComma": "es5",
-  "prettier.printWidth": 100,
-  "prettier.tabWidth": 2,
-
-  // Prevent conflicts with ESLint formatting
-  "eslint.format.enable": false
+  "prettier.prettierPath": "",
+  "prettier.useEditorConfig": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

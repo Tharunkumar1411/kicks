@@ -24,11 +24,7 @@ const ImageWithSkeleton = ({
     return (
       <div
         className={`${className} ${!loaded ? styles.skeleton : ""}`}
-        style={
-          loaded
-            ? { ...style, backgroundImage: `url(${src})` }
-            : style
-        }
+        style={loaded ? { ...style, backgroundImage: `url(${src})` } : style}
       >
         {children}
       </div>
