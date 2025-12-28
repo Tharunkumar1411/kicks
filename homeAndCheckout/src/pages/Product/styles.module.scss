@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .rootContainer {
   display: flex;
@@ -24,6 +24,7 @@
         height: 510px;
         opacity: 0px;
         background-color: white;
+        border-radius: 48px;
       }
     }
   }
@@ -33,14 +34,14 @@
     @include flexCol;
     gap: 20px;
     .header {
-      font-family: 'RubikSemiBold';
+      font-family: "RubikSemiBold";
       font-size: 32px;
       font-weight: 600;
       line-height: 37.92px;
     }
 
     .price {
-      font-family: 'RubikSemiBold';
+      font-family: "RubikSemiBold";
       font-size: 24px;
       font-weight: 600;
       line-height: 28.44px;
@@ -62,14 +63,14 @@
       gap: 20px;
 
       .header {
-        font-family: 'RubikSemiBold';
+        font-family: "RubikSemiBold";
         font-size: 16px;
         font-weight: 600;
         line-height: 18.96px;
       }
 
       .subHeader {
-        font-family: 'SansRegular';
+        font-family: "SansRegular";
         font-size: 16px;
         font-weight: 400;
         line-height: 21.79px;

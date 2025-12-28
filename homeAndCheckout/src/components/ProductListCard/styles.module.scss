@@ -1,9 +1,9 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/mixins.scss";
 
-.pagination{
-    @include flexRow;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-}  
+.pagination {
+  @include flexRow;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}

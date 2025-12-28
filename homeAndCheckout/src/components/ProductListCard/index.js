@@ -3,8 +3,8 @@ import useProductStore from "../../store/productList";
 import { Pagination, Typography } from "@mui/material";
 import { ROUTES } from "../../router/routes";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../CustomButton";
 import internalStyles from "./styles.module.scss";
+import ImageWithSkeleton from "../ImageWithSkelton";
 
 const ProductListCard = () => {
   const productList = useProductStore((state) => state.productList);
@@ -20,14 +20,10 @@ const ProductListCard = () => {
         {productList?.map((item, index) => (
           <div key={index} className={styles.dropContainer}>
             <div className={styles.imageContainer}>
-              <div
+              <ImageWithSkeleton
+                src={item.previewImg?.[0]}
+                alt="Hero banner"
                 className={styles.imgCard}
-                style={{
-                  backgroundImage: `url(${item.previewImg?.[0]})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                }}
               />
             </div>
 
@@ -45,10 +41,6 @@ const ProductListCard = () => {
         ))}
       </div>
 
-      {/* <div className={internalStyles.pagination}>
-                <CustomButton children="PREVIOUS"  sx={{backgroundColor:"#fff", color: "#000", width:"fit-content", marginTop:"15px"}}/>
-                <CustomButton children="NEXT"  sx={{backgroundColor:"#fff", color: "#000", width:"fit-content", marginTop:"15px"}}/>
-            </div> */}
       <div className={internalStyles.pagination}>
         <Pagination count={1} variant="outlined" shape="rounded" />
       </div>
