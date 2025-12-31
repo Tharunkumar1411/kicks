@@ -1,14 +1,17 @@
 import { axiosInstance } from "../utils/client";
-import { GET_HOME_DETAILS, GET_PRODUCT_DETAILS, GET_PRODUCT_LIST, GET_FILTER_PROPERTIES } from "../utils/endpoint";
+import { CART, HOME } from "../utils/endpoint";
 
-export const getProductList = () => {
-    return axiosInstance().get(GET_PRODUCT_LIST).then((response) => {
-        return response.data;
-    });
+export const getProductList = async () => {
+  const response = await axiosInstance().get(HOME.GET_PRODUCT_LIST);
+  return response.data;
 };
 
-export const getFilterProperties = () => {
-    return axiosInstance().get(GET_FILTER_PROPERTIES).then((response) => {
-        return response.data;
-    });
+export const getFilterProperties = async () => {
+  const response = await axiosInstance().get(HOME.GET_FILTER_PROPERTIES);
+  return response.data;
+};
+
+export const updateCart = async (productId) => {
+  const response = await axiosInstance().post(CART.UPDATE_CART, { productId });
+  return response.data;
 };

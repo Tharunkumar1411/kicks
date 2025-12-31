@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .navRootContainer {
   @include flexRow;
@@ -67,4 +67,10 @@
   padding-top: 0;
   background-color: #e7e7e3;
   z-index: 1;
+}
+
+.userDetailsContainer {
+  @include flexRow;
+  align-items: center;
+  gap: 10px;
 }
