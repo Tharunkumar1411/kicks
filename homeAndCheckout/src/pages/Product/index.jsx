@@ -15,6 +15,7 @@ import useHomeStore from "../../store/home";
 import useCartStore from "../../store/cart";
 import Cart from "../Cart";
 import ImageWithSkeleton from "../../components/ImageWithSkelton";
+import { updateCart } from "../../api/product";
 
 export default function Product() {
   const { id } = useParams();
@@ -36,11 +37,9 @@ export default function Product() {
   };
 
   const handleAddToCart = () => {
-    if (cartItems?.includes(id)) {
-      setOpenCart(true);
-      return;
-    }
-    setCartItems(id);
+    updateCart(id)
+      .then(() => setCartItems(id))
+      .catch(console.error);
   };
 
   const handleFav = () => {};
@@ -56,10 +55,10 @@ export default function Product() {
               <div className={styles.previewRootContainer}>
                 {Array(2)
                   .fill(0)
-                  .map((rowIndex, ind) => (
+                  .map((_, ind) => (
                     <div key={ind} className={styles.previewContainer}>
                       {productDetails?.previewImg
-                        .slice(rowIndex * 2, rowIndex * 2 + 2)
+                        .slice(ind * 2, ind * 2 + 2)
                         .map((imageUrl) => (
                           <ImageWithSkeleton
                             key={imageUrl}

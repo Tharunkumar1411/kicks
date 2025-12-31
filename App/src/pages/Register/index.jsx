@@ -7,34 +7,68 @@ import {
   FormHelperText,
   OutlinedInput,
   Typography,
-} from '@mui/material';
-import styles from './styles.module.scss';
-import { Formik } from 'formik';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { GENDERS, REGISTER_DETAILS, allowAlphabets, validationRules } from '../../utils/constants';
-import JoinCard from '../../components/JoinCard';
-import { useState } from 'react';
-import { ROUTES } from '../../router/routes';
-import { useNavigate } from 'react-router-dom';
-import { handleRegisterAuth } from '../../utils/auth';
+} from "@mui/material";
+import styles from "./styles.module.scss";
+import { Formik } from "formik";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {
+  GENDERS,
+  REGISTER_DETAILS,
+  allowAlphabets,
+  validationRules,
+} from "../../utils/constants";
+import JoinCard from "../../components/JoinCard";
+import { useState } from "react";
+import { ROUTES } from "../../router/routes";
+import { useNavigate } from "react-router-dom";
+import { createUser, handleRegisterAuth } from "../../services/auth";
+import useUserStore from "../../store/user";
 
 function Register() {
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const nav = useNavigate();
+  const setUserDetails = useUserStore((state) => state?.setUserDetails);
 
-  const nameValidation = (value = '') => {
+  const nameValidation = (value = "") => {
     return allowAlphabets(value);
   };
 
   const handleRegister = async (values) => {
-    setLoading(true);
-    const result = await handleRegisterAuth(values.email, values.password, values.firstName);
-    if (result) {
-      sessionStorage.setItem('Auth Token', result.user.accessToken);
-      nav(ROUTES.HOME);
+    try {
+      setLoading(true);
+      const result = await handleRegisterAuth(
+        values.email,
+        values.password,
+        values.firstName
+      );
+
+      let payload = {
+        email: values.email,
+        displayName: values.firstName,
+        firstName: values.firstName,
+        gender: values.gender,
+        phone: values.phone,
+        password: values.password,
+        authId: result.user.uid,
+      };
+
+      await createUser(payload);
+
+      setUserDetails({
+        email: values.email,
+        displayName: values.firstName,
+        uid: result.user.uid,
+      });
+
+      if (result) {
+        nav(ROUTES.HOME);
+      }
+    } catch (error) {
+      console.log("registration error::", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const checkValidation = (rule) => rule.regex.test(password);
@@ -46,9 +80,12 @@ function Register() {
   return (
     <div className={styles.registerRootContainer}>
       <div className={styles.registerContainer}>
-        <div style={{ marginBlock: '20px' }}>
+        <div style={{ marginBlock: "20px" }}>
           <Typography className={styles.registerTxt}>Register</Typography>
-          <Typography className={styles.registerSubTxt} onClick={handleNavLogin}>
+          <Typography
+            className={styles.registerSubTxt}
+            onClick={handleNavLogin}
+          >
             Already Have an account!
           </Typography>
 
@@ -68,53 +105,41 @@ function Register() {
           validationSchema={REGISTER_DETAILS.validationSchema}
           onSubmit={handleRegister}
         >
-          {({ values, errors, touched, handleChange, handleSubmit, setFieldValue, handleBlur }) => (
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            handleBlur,
+          }) => (
             <form className={styles.formWrapper}>
               <FormControl>
                 <Typography className={styles.label}>Your Name</Typography>
                 <OutlinedInput
                   sx={{
-                    '& input:-webkit-autofill': {
-                      WebkitBoxShadow: '0 0 0 1000px #fff inset',
-                      backgroundColor: 'transparent !important',
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: "0 0 0 1000px #fff inset",
+                      backgroundColor: "transparent !important",
                     },
                   }}
                   autoComplete="off"
                   type="text"
                   className={styles.input}
-                  placeholder="First Name *"
+                  placeholder="Name *"
                   onInput={(e) => {
-                    setFieldValue('firstName', nameValidation(e?.target?.value));
+                    setFieldValue(
+                      "firstName",
+                      nameValidation(e?.target?.value)
+                    );
                   }}
                   value={values.firstName}
                   name="firstName"
                   onBlur={handleBlur}
                   error={errors?.firstName && touched?.firstName}
                   inputProps={{
-                    maxLength: '26',
-                  }}
-                />
-              </FormControl>
-              <FormControl>
-                <OutlinedInput
-                  sx={{
-                    '& input:-webkit-autofill': {
-                      WebkitBoxShadow: '0 0 0 1000px #E7E7E3 inset',
-                      backgroundColor: 'transparent !important',
-                    },
-                  }}
-                  type="text"
-                  className={styles.input}
-                  placeholder="Last Name *"
-                  onInput={(e) => {
-                    setFieldValue('lastName', nameValidation(e?.target?.value));
-                  }}
-                  value={values.lastName}
-                  name="lastName"
-                  onBlur={handleBlur}
-                  error={errors?.lastName && touched?.lastName}
-                  inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
               </FormControl>
@@ -122,14 +147,14 @@ function Register() {
               <FormControl>
                 <Typography className={styles.label}>Gender</Typography>
 
-                <Box row>
+                <Box>
                   {GENDERS.map(({ value, label }) => (
                     <FormControlLabel
                       key={value}
                       control={
                         <Checkbox
                           checked={values.gender === value}
-                          onChange={() => setFieldValue('gender', value)}
+                          onChange={() => setFieldValue("gender", value)}
                           onBlur={handleBlur}
                           value={value.gender}
                         />
@@ -144,47 +169,71 @@ function Register() {
                 <Typography className={styles.label}>Login Details</Typography>
                 <OutlinedInput
                   sx={{
-                    '& input:-webkit-autofill': {
-                      WebkitBoxShadow: '0 0 0 1000px #E7E7E3 inset',
-                      backgroundColor: 'transparent !important',
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                      backgroundColor: "transparent !important",
                     },
                   }}
                   type="email"
                   className={styles.input}
                   placeholder="Email *"
                   onInput={(e) => {
-                    setFieldValue('email', e.target.value);
+                    setFieldValue("email", e.target.value);
                   }}
                   value={values.email}
                   name="email"
                   onBlur={handleBlur}
                   error={errors?.email && touched?.email}
                   inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
               </FormControl>
               <FormControl>
                 <OutlinedInput
                   sx={{
-                    '& input:-webkit-autofill': {
-                      WebkitBoxShadow: '0 0 0 1000px #E7E7E3 inset',
-                      backgroundColor: 'transparent !important',
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                      backgroundColor: "transparent !important",
+                    },
+                  }}
+                  type="tel"
+                  className={styles.input}
+                  placeholder="Phone *"
+                  onInput={(e) => {
+                    setFieldValue("phone", e.target.value);
+                  }}
+                  value={values.phone}
+                  name="phone"
+                  onBlur={handleBlur}
+                  error={errors?.phone && touched?.phone}
+                  inputProps={{
+                    maxLength: "10",
+                  }}
+                />
+              </FormControl>
+              <FormControl>
+                <OutlinedInput
+                  sx={{
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                      backgroundColor: "transparent !important",
                     },
                   }}
                   type="password"
+                  autoComplete="on"
                   className={styles.input}
                   placeholder="Password *"
                   onInput={(e) => {
                     setPassword(e.target.value);
-                    setFieldValue('password', e.target.value);
+                    setFieldValue("password", e.target.value);
                   }}
                   value={values.password}
                   name="password"
                   onBlur={handleBlur}
                   error={errors?.password && touched?.password}
                   inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
                 {/* <FormHelperText className={styles.error}>
@@ -196,9 +245,13 @@ function Register() {
                     key={index}
                     style={{
                       // eslint-disable-next-line no-nested-ternary
-                      marginTop: '5px',
-                      color: checkValidation(rule) ? 'green' : errors.password ? 'red' : '#000',
-                      fontWeight: checkValidation(rule) ? 'bold' : 'normal',
+                      marginTop: "5px",
+                      color: checkValidation(rule)
+                        ? "green"
+                        : errors.password
+                          ? "red"
+                          : "#000",
+                      fontWeight: checkValidation(rule) ? "bold" : "normal",
                     }}
                   >
                     {rule.text}
@@ -209,31 +262,43 @@ function Register() {
               <FormControl>
                 <OutlinedInput
                   sx={{
-                    '& input:-webkit-autofill': {
-                      WebkitBoxShadow: '0 0 0 1000px #E7E7E3 inset',
-                      backgroundColor: 'transparent !important',
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: "0 0 0 1000px #E7E7E3 inset",
+                      backgroundColor: "transparent !important",
                     },
                   }}
                   type="password"
+                  autoComplete="on"
                   className={styles.input}
                   placeholder="Confirm Password *"
                   onInput={(e) => {
-                    setFieldValue('confirmPassword', e.target.value);
+                    setFieldValue("confirmPassword", e.target.value);
                   }}
                   value={values.confirmPassword}
                   name="confirmPassword"
                   onBlur={handleBlur}
                   error={errors?.confirmPassword && touched?.confirmPassword}
                   inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
                 <FormHelperText className={styles.error}>
-                  {errors?.confirmPassword && touched?.confirmPassword && errors?.confirmPassword}
+                  {errors?.confirmPassword &&
+                    touched?.confirmPassword &&
+                    errors?.confirmPassword}
                 </FormHelperText>
               </FormControl>
 
-              <div className={styles.registerBtn} onClick={!loading ? handleSubmit : null}>
+              {!!Object.keys(errors).length && (
+                <FormHelperText style={{ color: "red" }}>
+                  Enter required details
+                </FormHelperText>
+              )}
+
+              <div
+                className={styles.registerBtn}
+                onClick={!loading ? handleSubmit : null}
+              >
                 <Typography>REGISTER</Typography>
                 {loading ? (
                   <CircularProgress className={styles.circleLoader} />
@@ -241,10 +306,6 @@ function Register() {
                   <ArrowForwardIcon />
                 )}
               </div>
-              {console.log(errors)}
-              {!!Object.keys(errors).length && (
-                <FormHelperText style={{ color: 'red' }}>Enter required details</FormHelperText>
-              )}
             </form>
           )}
         </Formik>

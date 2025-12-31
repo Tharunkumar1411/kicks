@@ -21,7 +21,7 @@ export default function ReviewCard({
       <div className={styles.ratingContainer}>
         <Rating
           name="read-only"
-          value={rating}
+          value={+rating}
           readOnly
           className={styles.rating}
         />

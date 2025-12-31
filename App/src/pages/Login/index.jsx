@@ -4,27 +4,37 @@ import {
   FormHelperText,
   OutlinedInput,
   Typography,
-} from '@mui/material';
-import styles from './styles.module.scss';
-import { Formik } from 'formik';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { LOGIN_DETAILS } from '../../utils/constants';
-import JoinCard from '../../components/JoinCard';
-import { handleGoogleAuth, handleLoginAuth } from '../../utils/auth';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router/routes';
+} from "@mui/material";
+import styles from "./styles.module.scss";
+import { Formik } from "formik";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { LOGIN_DETAILS } from "../../utils/constants";
+import JoinCard from "../../components/JoinCard";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../router/routes";
+import { handleGoogleAuth, handleLoginAuth } from "../../services/auth";
+import useUserStore from "../../store/user";
 
 function Login() {
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
+  const { setUserDetails } = useUserStore((state) => state);
 
   const handleLogin = async (values) => {
     setLoading((prev) => !prev);
 
     try {
-      const userDetails = await handleLoginAuth(values.email, values.password, 'Login');
-      sessionStorage.setItem('Auth Token', userDetails?.user?.accessToken);
+      const userDetails = await handleLoginAuth(
+        values.email,
+        values.password,
+        "Login"
+      );
+      setUserDetails({
+        email: userDetails.user?.email,
+        displayName: userDetails.user?.displayName,
+        uid: userDetails.user?.uid,
+      });
       nav(ROUTES.HOME);
     } catch (error) {
     } finally {
@@ -34,7 +44,7 @@ function Login() {
 
   const handleGoogleLogin = async () => {
     const result = await handleGoogleAuth();
-    sessionStorage.setItem('Auth Token', result?.accessToken);
+    sessionStorage.setItem("Auth Token", result?.accessToken);
     if (result?.accessToken) {
       nav(ROUTES.HOME);
     }
@@ -49,7 +59,10 @@ function Login() {
       <div className={styles.registerContainer}>
         <div>
           <Typography className={styles.registerTxt}>Login</Typography>
-          <Typography className={styles.registerSubTxt} onClick={handleNavRegister}>
+          <Typography
+            className={styles.registerSubTxt}
+            onClick={handleNavRegister}
+          >
             Create your account here
           </Typography>
         </div>
@@ -59,7 +72,15 @@ function Login() {
           validationSchema={LOGIN_DETAILS.validationSchema}
           onSubmit={handleLogin}
         >
-          {({ values, errors, touched, handleChange, handleSubmit, setFieldValue, handleBlur }) => (
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            handleBlur,
+          }) => (
             <form className={styles.formWrapper}>
               <FormControl>
                 <OutlinedInput
@@ -67,14 +88,14 @@ function Login() {
                   className={styles.input}
                   placeholder="Email *"
                   onInput={(e) => {
-                    setFieldValue('email', e.target.value);
+                    setFieldValue("email", e.target.value);
                   }}
                   value={values.email}
                   name="email"
                   onBlur={handleBlur}
                   error={errors?.email && touched?.email}
                   inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
               </FormControl>
@@ -82,16 +103,17 @@ function Login() {
                 <OutlinedInput
                   type="password"
                   className={styles.input}
+                  autoComplete="on"
                   placeholder="Password *"
                   onInput={(e) => {
-                    setFieldValue('password', e.target.value);
+                    setFieldValue("password", e.target.value);
                   }}
                   value={values.password}
                   name="password"
                   onBlur={handleBlur}
                   error={errors?.password && touched?.password}
                   inputProps={{
-                    maxLength: '26',
+                    maxLength: "26",
                   }}
                 />
                 <FormHelperText className={styles.error}>
@@ -99,7 +121,10 @@ function Login() {
                 </FormHelperText>
               </FormControl>
 
-              <div className={styles.registerBtn} onClick={!loading ? handleSubmit : null}>
+              <div
+                className={styles.registerBtn}
+                onClick={!loading ? handleSubmit : null}
+              >
                 <Typography>EMAIL LOGIN</Typography>
                 {loading ? (
                   <CircularProgress className={styles.circleLoader} />

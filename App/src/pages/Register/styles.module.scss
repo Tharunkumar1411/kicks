@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .registerRootContainer {
   @include flexRow;
@@ -15,7 +15,7 @@
     margin: 20px;
 
     @media screen and (min-width: 768px) {
-      padding: 0px 40px;
+      // padding: 0px 40px;
       align-items: flex-start;
       flex-shrink: 0;
       align-self: stretch;
@@ -23,13 +23,13 @@
 
     .registerTxt {
       color: var(--Dark-Gray, #232321);
-      font-family: 'RubikSemiBold';
+      font-family: "RubikSemiBold";
       font-size: 36px;
     }
 
     .registerSubTxt {
       color: var(--Dark-Gray, #232321);
-      font-family: 'SansRegular';
+      font-family: "SansRegular";
       font-size: 14px;
       text-decoration: underline;
       cursor: pointer;
@@ -70,14 +70,13 @@
 
       .label {
         color: var(--Dark-Gray, #232321);
-        font-family: 'RubikSemiBold';
+        font-family: "RubikSemiBold";
         font-size: 24px;
         margin-bottom: 1rem;
       }
 
       .input {
         border-radius: 8px;
-        border: 1px solid var(--Dark-Gray, #232321);
         height: 48px;
         width: 440px;
 

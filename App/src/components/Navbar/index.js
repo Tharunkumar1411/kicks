@@ -1,32 +1,39 @@
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useState } from 'react';
-import styles from './styles.module.scss';
-import { Badge, Typography } from '@mui/material';
-import { Squash as Hamburger } from 'hamburger-react';
-import PersonIcon from '@mui/icons-material/Person';
-import logoImg from '../../assets/images/Logo.svg';
-import CartIcon from '@mui/icons-material/ShoppingCart';
-import { NavItems } from '../../utils/constants';
-import isAuthenticate from '../../Hook/isAuthenticate';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router/routes';
-import NavDrawer from './Drawer';
-import useCartStore from 'home/cartStore';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useState } from "react";
+import styles from "./styles.module.scss";
+import { Badge, Typography } from "@mui/material";
+import { Squash as Hamburger } from "hamburger-react";
+import PersonIcon from "@mui/icons-material/Person";
+import logoImg from "../../assets/images/Logo.svg";
+import CartIcon from "@mui/icons-material/ShoppingCart";
+import { NavItems } from "../../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../router/routes";
+import NavDrawer from "./Drawer";
+import useCartStore from "home/cartStore";
+import useUserStore from "../../store/user";
+import useAuthenticate from "../../Hook/useAuthenticate";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function NavBar() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
-  const { token } = isAuthenticate();
   const { cartItems } = useCartStore((state) => state);
+  const { userDetails, clearUserDetails } = useUserStore((state) => state);
 
   const nav = useNavigate();
 
   const handleProfileClick = () => {
-    if (!token) {
+    if (!userDetails?.email) {
       nav(ROUTES.LOGIN);
     }
+  };
+
+  const handleLogout = () => {
+    clearUserDetails();
+    nav(ROUTES.LOGIN);
   };
 
   return (
@@ -51,9 +58,26 @@ function NavBar() {
         </div>
 
         <div className={styles.navProfileItems}>
-          <PersonIcon onClick={handleProfileClick} style={{ cursor: 'pointer' }} />
+          {userDetails?.email && !isMobile ? (
+            <div className={styles.userDetailsContainer}>
+              <Typography className={styles.userNameText}>
+                Hi, {userDetails?.displayName ?? "User"}
+              </Typography>
+
+              <LogoutIcon
+                onClick={handleLogout}
+                style={{ cursor: "pointer" }}
+              />
+            </div>
+          ) : (
+            <PersonIcon
+              onClick={handleProfileClick}
+              style={{ cursor: "pointer" }}
+            />
+          )}
+
           <Badge badgeContent={cartItems.length} color="primary">
-            <CartIcon style={{ cursor: 'pointer' }} />
+            <CartIcon style={{ cursor: "pointer" }} />
           </Badge>
         </div>
       </div>
