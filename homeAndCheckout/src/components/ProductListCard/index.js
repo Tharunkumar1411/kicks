@@ -1,9 +1,8 @@
-import styles from "../NewDropCard/styles.module.scss";
 import useProductStore from "../../store/productList";
 import { Pagination, Typography } from "@mui/material";
 import { ROUTES } from "../../router/routes";
 import { useNavigate } from "react-router-dom";
-import internalStyles from "./styles.module.scss";
+import styles from "./styles.module.scss";
 import ImageWithSkeleton from "../ImageWithSkelton";
 
 const ProductListCard = () => {
@@ -41,7 +40,7 @@ const ProductListCard = () => {
         ))}
       </div>
 
-      <div className={internalStyles.pagination}>
+      <div className={styles.pagination}>
         <Pagination count={1} variant="outlined" shape="rounded" />
       </div>
     </div>
