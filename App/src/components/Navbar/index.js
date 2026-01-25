@@ -76,7 +76,7 @@ function NavBar() {
             />
           )}
 
-          <Badge badgeContent={cartItems.length} color="primary">
+          <Badge badgeContent={cartItems?.length} color="primary">
             <CartIcon style={{ cursor: "pointer" }} />
           </Badge>
         </div>

@@ -23,7 +23,7 @@ export default function Product() {
   const [openCart, setOpenCart] = useState(false);
   const isMobile = useMediaQuery("(max-width:1024px)");
   const { productDetails, setProductDetails } = useHomeStore((state) => state);
-  const { setCartItems, cartItems } = useCartStore((state) => state);
+  const { cartItems, addToCart, isInCart } = useCartStore((state) => state);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,9 +37,40 @@ export default function Product() {
   };
 
   const handleAddToCart = () => {
-    updateCart(id)
-      .then(() => setCartItems(id))
-      .catch(console.error);
+    // Validate size and color selection
+    if (!cart.size || !cart.color) {
+      alert("Please select size and color before adding to cart");
+      return;
+    }
+
+    // Check if item already in cart
+    const itemExists = isInCart(id, cart.size, cart.color);
+
+    if (itemExists) {
+      // Open cart drawer to view
+      setOpenCart(true);
+      return;
+    }
+
+    // Add to cart with full product details
+    const cartItem = {
+      productId: id,
+      productName: productDetails.productName,
+      price: productDetails.price,
+      image: productDetails.previewImg?.[0] || "",
+      size: cart.size,
+      color: cart.color,
+    };
+
+    addToCart(cartItem);
+
+    // Optional: Call backend API (commented out as mentioned)
+    // updateCart(cartItem)
+    //   .then(() => console.log("Cart updated on backend"))
+    //   .catch(console.error);
+
+    // Open cart drawer to show added item
+    setOpenCart(true);
   };
 
   const handleFav = () => {};
@@ -90,7 +121,9 @@ export default function Product() {
                   <CustomButton
                     onClick={handleAddToCart}
                     children={
-                      cartItems?.includes(id) ? `VIEW CART` : `ADD TO CART`
+                      cart.size && cart.color && isInCart(id, cart.size, cart.color)
+                        ? `VIEW CART`
+                        : `ADD TO CART`
                     }
                     sx={{
                       backgroundColor: "#000",
