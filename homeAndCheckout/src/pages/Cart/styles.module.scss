@@ -93,6 +93,26 @@
                 }
               }
             }
+
+            .quantityContainer {
+              @include flexRow;
+              gap: 10px;
+              align-items: center;
+              margin-top: 5px;
+
+              .label {
+                font-family: 'SansRegular';
+                font-size: 16px;
+                font-weight: 600;
+                color: #232321;
+                min-width: 30px;
+                text-align: center;
+
+                @media screen and (max-width: 768px) {
+                  font-size: 12px;
+                }
+              }
+            }
           }
         }
 
@@ -142,6 +162,62 @@
 
         @media screen and (max-width: 768px) {
           font-size: 12px;
+        }
+      }
+
+      .subHeader {
+        font-family: 'SansRegular';
+        font-size: 16px;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 10px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      .summaryContainer {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+
+        .summaryRow {
+          @include flexRow;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+
+        .checkoutButton {
+          width: 100%;
+          padding: 16px;
+          margin-top: 20px;
+          background-color: #232321;
+          color: #fff;
+          font-family: 'RubikSemiBold';
+          font-size: 16px;
+          font-weight: 600;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #4a69e2;
+          }
+
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+            padding: 14px;
+          }
         }
       }
     }

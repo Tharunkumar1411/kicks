@@ -54,16 +54,6 @@ const OrderSummaryCard = ({ onClose }) => {
             marginTop: "15px",
           }}
         />
-        <CustomButton
-          onClick={() => onClose(false)}
-          children="CLOSE"
-          sx={{
-            backgroundColor: "#fff",
-            color: "#000",
-            width: "100%",
-            marginTop: "15px",
-          }}
-        />
       </div>
     </div>
   );
