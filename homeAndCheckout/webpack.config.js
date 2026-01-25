@@ -80,6 +80,9 @@ module.exports = (_, argv) => ({
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
-    new Dotenv(),
+    new Dotenv({
+      silent: true, // Don't fail if .env file is missing
+      systemvars: true, // Load system environment variables (for Vercel)
+    }),
   ],
 });
