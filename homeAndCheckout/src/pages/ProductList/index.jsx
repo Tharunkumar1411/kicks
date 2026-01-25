@@ -19,6 +19,7 @@ export default function ProductList() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const setProductList = useProductStore((state) => state.setProductList);
+  const setOriginalProductList = useProductStore((state) => state.setOriginalProductList);
   const setFilterProperty = useProductStore((state) => state.setFilterProperty);
   const [category, setCategory] = useState("Life Style");
   const [showMenu, setShowMenu] = useState(false);
@@ -27,7 +28,7 @@ export default function ProductList() {
     size: "",
     categories: [],
     gender: [],
-    price: "",
+    price: 0,
   });
   const [filterDrawer, setFilterDrawer] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ export default function ProductList() {
       .then((results) => {
         if (results[0].status === "fulfilled") {
           setProductList(results[0].value);
+          setOriginalProductList(results[0].value); // Store original list for reset
         }
         if (results[1].status === "fulfilled") {
           setFilterProperty(results[1].value);
@@ -44,7 +46,7 @@ export default function ProductList() {
       })
       .catch((error) => console.error("Unexpected Error:", error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [setProductList, setOriginalProductList, setFilterProperty]);
 
   const handleCateogry = () => {
     setShowMenu((prev) => !prev);
