@@ -46,10 +46,18 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getHomeDetails().then((res) => {
-      setHomeDetails(res);
-    });
-  }, []);
+    const fetchHomeDetails = async () => {
+      try {
+        const res = await getHomeDetails();
+        setHomeDetails(res);
+      } catch (error) {
+        // Error is already handled and shown to user via toast
+        console.error('Failed to load home details:', error);
+      }
+    };
+
+    fetchHomeDetails();
+  }, [setHomeDetails]);
 
   return (
     <Suspense fallback={<Loader />}>

@@ -3,7 +3,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const deps = require('./package.json').dependencies;
 const path = require('path');
-const { ENV_MODE } = require('./src/utils/constants');
+
+// Define ENV_MODE directly here since webpack.config.js can't import ES6 modules
+const ENV_MODE = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production'
+};
 
 module.exports = (_, argv) => ({
   output: {
