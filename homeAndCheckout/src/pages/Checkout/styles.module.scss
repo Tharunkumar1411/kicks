@@ -33,9 +33,13 @@
     margin: 20px;
     justify-content: space-between;
     flex-direction: row-reverse;
+    max-width: 100%;
 
     @media screen and (max-width: 768px) {
       @include flexCol;
+      margin: 16px;
+      gap: 16px;
+      overflow-x: hidden;
     }
     .shipRootContainer {
       @include flexCol;
