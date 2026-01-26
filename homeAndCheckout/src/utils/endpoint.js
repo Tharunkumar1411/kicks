@@ -12,3 +12,7 @@ export const HOME = {
 export const CART = {
   UPDATE_CART: BASEURL + `api/cart/update`,
 };
+
+export const BANNER = {
+  GET_OFFER_BANNER: BASEURL + `api/getOfferBanner`,
+};

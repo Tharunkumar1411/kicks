@@ -28,20 +28,20 @@ export const toastConfig = {
 };
 
 const App = () => {
-  return(
+  return (
     <ErrorBoundary>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/product/:id" element={<Product />}/>
-          <Route path="/cart" element={<Cart />}/>
-          <Route path="/checkout" element={<Checkout />}/>
-          <Route path="/product-list" element={<ProductList />}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/product-list" element={<ProductList />} />
         </Routes>
       </Suspense>
       <ToastContainer {...toastConfig} />
     </ErrorBoundary>
-  )
-}
+  );
+};
 
 export default App;

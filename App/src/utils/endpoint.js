@@ -8,3 +8,7 @@ export const AUTH = {
 export const USER = {
   GET_USER_DETAILS: (userId) => BASEURL + `api/getUserDetails?userId=${userId}`,
 };
+
+export const BANNER = {
+  GET_OFFER_BANNER: BASEURL + `api/getOfferBanner`,
+};

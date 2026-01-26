@@ -1,0 +1,53 @@
+@import "../../styles/mixins.scss";
+
+.bannerContainer {
+  // width: 100%;
+  @include flexRow;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 1000;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px 16px;
+  }
+
+  &:hover {
+    opacity: 0.95;
+  }
+
+  .bannerContent {
+    flex: 1;
+    @include flexRow;
+    align-items: center;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    .bannerMessage {
+      font-family: "RubikSemiBold";
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.4;
+
+      @media screen and (max-width: 768px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .closeButton {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+
+    @media screen and (max-width: 768px) {
+      right: 8px;
+    }
+  }
+}

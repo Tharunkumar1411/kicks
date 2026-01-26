@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AppRoutes from "./router/AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
+import OfferBanner from "./components/OfferBanner";
 
 export const toastErrorConfig = {
   position: "top-center",
@@ -22,6 +23,7 @@ const App = () => {
   return (
     <ErrorBoundary>
       <BrowserRouter>
+        <OfferBanner />
         <AppRoutes />
         <ToastContainer {...toastErrorConfig} />
       </BrowserRouter>
