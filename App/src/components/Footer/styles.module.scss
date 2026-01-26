@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .footerRootContainer {
   overflow: hidden;
@@ -113,12 +113,11 @@
         }
 
         .aboutTxt {
-          width: fit-content;
+          width: 220px;
           font-family: SansRegular !important;
           line-height: 27.24px;
 
           @media screen and (max-width: 768px) {
-            width: fit-content;
             font-size: 16px;
           }
         }
