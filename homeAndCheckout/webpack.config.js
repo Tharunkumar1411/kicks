@@ -75,6 +75,10 @@ module.exports = (_, argv) => ({
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
+        zustand: {
+          singleton: true,
+          requiredVersion: deps.zustand,
+        },
       },
     }),
     new HtmlWebPackPlugin({
