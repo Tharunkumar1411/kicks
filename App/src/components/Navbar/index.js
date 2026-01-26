@@ -13,8 +13,8 @@ import { ROUTES } from "../../router/routes";
 import NavDrawer from "./Drawer";
 import useCartStore from "home/cartStore";
 import useUserStore from "../../store/user";
-import useAuthenticate from "../../Hook/useAuthenticate";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { handleLogout } from "../../services/auth";
 
 function NavBar() {
   const theme = useTheme();
@@ -31,8 +31,9 @@ function NavBar() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogoutUser = () => {
     clearUserDetails();
+    handleLogout();
     nav(ROUTES.LOGIN);
   };
 
@@ -65,7 +66,7 @@ function NavBar() {
               </Typography>
 
               <LogoutIcon
-                onClick={handleLogout}
+                onClick={handleLogoutUser}
                 style={{ cursor: "pointer" }}
               />
             </div>
@@ -77,7 +78,10 @@ function NavBar() {
           )}
 
           <Badge badgeContent={cartItems?.length} color="primary">
-            <CartIcon style={{ cursor: "pointer" }} />
+            <CartIcon
+              style={{ cursor: "pointer" }}
+              onClick={() => nav(ROUTES.CART)}
+            />
           </Badge>
         </div>
       </div>

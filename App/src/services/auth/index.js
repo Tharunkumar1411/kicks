@@ -7,9 +7,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase";
+import { showErrorToast, showSuccessToast } from "../../utils/errorHandler";
 
 export const createUser = async (payload) => {
   return await axios.post(AUTH.REGISTER_USER, payload).then((response) => {
@@ -92,4 +94,13 @@ export const handleRegisterAuth = async (email, password, displayName = "") => {
       const errorMessage = error.message;
       // Handle errors here
     });
+};
+
+export const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    showSuccessToast("User signed out successfully");
+  } catch (error) {
+    showErrorToast("Sign out failed");
+  }
 };

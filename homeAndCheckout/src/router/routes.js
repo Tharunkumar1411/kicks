@@ -3,4 +3,5 @@ export const ROUTES = {
   CART: `/cart`,
   CHEKOUT: `/checkout`,
   PRODUCT_LIST: `/product-list`,
+  LOGIN: `/login`,
 };
