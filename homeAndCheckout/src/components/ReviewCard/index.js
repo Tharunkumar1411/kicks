@@ -25,7 +25,6 @@ export default function ReviewCard({
           readOnly
           className={styles.rating}
         />
-        <span>{rating}</span>
       </div>
       <ImageWithSkeleton
         src={reviewImg}

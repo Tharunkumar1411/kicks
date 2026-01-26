@@ -216,7 +216,12 @@ export default function Product() {
               <Typography className={styles.header}>
                 You may also like
               </Typography>
-              <button className={styles.button}>EXPLORE</button>
+              <button
+                className={styles.button}
+                onClick={() => navigate(ROUTES.PRODUCT_LIST)}
+              >
+                EXPLORE
+              </button>
             </div>
 
             <NewDropCard />

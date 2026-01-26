@@ -1,4 +1,4 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .heading {
   color: var(--Dark-Gray, #232321);
@@ -138,9 +138,11 @@
   gap: 1rem;
 
   .dropContent {
-    @include flexRow;
-    justify-content: space-between;
-    align-items: end;
+    // @include flexRow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
 
     .header {
       color: var(--Dark-Gray, #232321);
@@ -150,7 +152,6 @@
       font-weight: 600;
       line-height: 95%;
       text-transform: uppercase;
-      margin: 20px;
 
       @media screen and (max-width: 768px) {
         font-size: 24px;
@@ -172,7 +173,6 @@
       font-weight: 500;
       line-height: normal;
       letter-spacing: 0.25px;
-      margin: 20px;
       text-transform: uppercase;
       cursor: pointer;
       @media screen and (max-width: 768px) {

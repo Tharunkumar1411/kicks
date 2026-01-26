@@ -18,7 +18,10 @@ const ProductListCard = () => {
       <div className={styles.rootContainer}>
         {productList?.map((item, index) => (
           <div key={index} className={styles.dropContainer}>
-            <div className={styles.imageContainer}>
+            <div
+              className={styles.imageContainer}
+              onClick={() => navigate(`${ROUTES.PRODUCT}/${item?.productId}`)}
+            >
               <ImageWithSkeleton
                 src={item.previewImg?.[0]}
                 alt="Hero banner"
@@ -29,13 +32,9 @@ const ProductListCard = () => {
             <Typography className={styles.productName}>
               {item.productName}
             </Typography>
-            <button
-              onClick={() => handleProduct(item.productId)}
-              className={styles.productButton}
-            >
-              View Product -{" "}
-              <span style={{ color: "#FFA52F" }}>{item.price}</span>
-            </button>
+            <Typography className={styles.productName}>
+              ₹{item.price}
+            </Typography>
           </div>
         ))}
       </div>

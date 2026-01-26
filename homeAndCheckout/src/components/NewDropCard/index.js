@@ -71,7 +71,10 @@ const NewDropCard = () => {
       <div className={styles.rootContainer} ref={scrollContainerRef}>
         {homeDetails?.newDrops?.map((item, index) => (
           <div key={index} className={styles.dropContainer}>
-            <div className={styles.imageContainer}>
+            <div
+              className={styles.imageContainer}
+              onClick={() => handleProduct(item?.productId)}
+            >
               <ImageWithSkeleton
                 src={item.url}
                 alt="Hero banner"
@@ -83,13 +86,14 @@ const NewDropCard = () => {
             <Typography className={styles.productName}>
               {item.productName}
             </Typography>
-            <button
+            {/* <Typography className={styles.productName}>{item.price}</Typography> */}
+            {/* <button
               onClick={() => handleProduct(item.productId)}
               className={styles.productButton}
             >
               View Product -{" "}
               <span style={{ color: "#FFA52F" }}>{item.price}</span>
-            </button>
+            </button> */}
           </div>
         ))}
       </div>

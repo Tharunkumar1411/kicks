@@ -52,7 +52,7 @@ const Home = () => {
         setHomeDetails(res);
       } catch (error) {
         // Error is already handled and shown to user via toast
-        console.error('Failed to load home details:', error);
+        console.error("Failed to load home details:", error);
       }
     };
 
@@ -99,15 +99,7 @@ const Home = () => {
 
         <div className={styles.newDropContainer}>
           <div className={styles.dropContent}>
-            <Typography className={styles.header}>
-              Don’t miss out new drops
-            </Typography>
-            <button
-              className={styles.button}
-              onClick={() => nav(`${ROUTES.PRODUCT_LIST}`)}
-            >
-              VIEW MORE
-            </button>
+            <Typography className={styles.header}>New drops</Typography>
           </div>
 
           <NewDropCard />
@@ -163,7 +155,6 @@ const Home = () => {
         <div className={styles.newDropContainer}>
           <div className={styles.dropContent}>
             <Typography className={styles.header}>Reviews</Typography>
-            <button className={styles.button}>SEE ALL</button>
           </div>
 
           <div className={styles.reviewRootContainer}>
