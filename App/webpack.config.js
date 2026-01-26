@@ -21,6 +21,7 @@ module.exports = (_, argv) => ({
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".scss"],
+    modules: [path.resolve(__dirname, "node_modules"), "node_modules"],
   },
 
   devServer: {
@@ -73,6 +74,11 @@ module.exports = (_, argv) => ({
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
+        },
+        zustand: {
+          singleton: true,
+          requiredVersion: deps.zustand,
+          eager: true,
         },
       },
     }),
