@@ -4,6 +4,7 @@ import { Drawer, Typography, useMediaQuery } from "@mui/material";
 import ColorSizePallate from "../../components/ColorSizePallate";
 import CustomButton from "../../components/CustomButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import CustomCarousel from "../../components/CustomCarousel";
 import NewDropCard from "../../components/NewDropCard";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,7 +14,9 @@ import { formatAmount } from "../../utils/helper";
 import Loader from "../../components/Loader";
 import useHomeStore from "../../store/home";
 import useCartStore from "../../store/cart";
-import Cart from "../Cart";
+import useCheckoutStore from "../../store/checkout";
+import useWishlistStore from "../../store/wishlist";
+import CartDrawer from "../../components/CartDrawer";
 import ImageWithSkeleton from "../../components/ImageWithSkelton";
 import { updateCart } from "../../api/product";
 
@@ -24,6 +27,8 @@ export default function Product() {
   const isMobile = useMediaQuery("(max-width:1024px)");
   const { productDetails, setProductDetails } = useHomeStore((state) => state);
   const { cartItems, addToCart, isInCart } = useCartStore((state) => state);
+  const { setSingleCheckoutItem } = useCheckoutStore((state) => state);
+  const { toggleWishlist, isInWishlist } = useWishlistStore((state) => state);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +38,25 @@ export default function Product() {
   }, []);
 
   const handleBuy = (productId) => {
-    navigate(`${ROUTES.CHEKOUT}/${productId}`);
+    // Validate size and color selection
+    if (!cart.size || !cart.color) {
+      alert("Please select size and color before buying");
+      return;
+    }
+
+    // Set single item for checkout
+    const checkoutItem = {
+      productId: id,
+      productName: productDetails.productName,
+      price: productDetails.price,
+      image: productDetails.previewImg?.[0] || "",
+      size: cart.size,
+      color: cart.color,
+      quantity: 1,
+    };
+
+    setSingleCheckoutItem(checkoutItem);
+    navigate(ROUTES.CHEKOUT);
   };
 
   const handleAddToCart = () => {
@@ -73,7 +96,15 @@ export default function Product() {
     setOpenCart(true);
   };
 
-  const handleFav = () => {};
+  const handleFav = () => {
+    const wishlistItem = {
+      productId: id,
+      productName: productDetails.productName,
+      price: productDetails.price,
+      image: productDetails.previewImg?.[0] || "",
+    };
+    toggleWishlist(wishlistItem);
+  };
 
   return (
     <div>
@@ -121,7 +152,9 @@ export default function Product() {
                   <CustomButton
                     onClick={handleAddToCart}
                     children={
-                      cart.size && cart.color && isInCart(id, cart.size, cart.color)
+                      cart.size &&
+                      cart.color &&
+                      isInCart(id, cart.size, cart.color)
                         ? `VIEW CART`
                         : `ADD TO CART`
                     }
@@ -133,7 +166,13 @@ export default function Product() {
                   />
                   <CustomButton
                     onClick={handleFav}
-                    children={<FavoriteBorderIcon />}
+                    children={
+                      isInWishlist(id) ? (
+                        <FavoriteIcon style={{ color: "#ff4444" }} />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )
+                    }
                     sx={{
                       backgroundColor: "#000",
                       color: "#fff",
@@ -188,7 +227,7 @@ export default function Product() {
             open={openCart}
             onClose={() => setOpenCart(false)}
           >
-            <Cart setOpenCart={setOpenCart} />
+            <CartDrawer setOpenCart={setOpenCart} />
           </Drawer>
         </div>
       ) : (

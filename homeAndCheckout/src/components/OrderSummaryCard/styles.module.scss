@@ -1,60 +1,164 @@
 @import "../../styles/mixins.scss";
 
-.summaryCard{
+.summaryCard {
+  width: 100%;
+  height: fit-content;
+  gap: 24px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
     width: 100%;
     height: fit-content;
-    gap: 24px;
-    opacity: 0px;
+    gap: 16px;
+    border-radius: 16px;
+    background-color: #fff;
+  }
 
-    @media screen and (max-width: 768px) {
-        width: 100%;
-        height: fit-content;
-        gap: 16px;
-        border-radius: 16px;
-        opacity: 0px;
+  .summaryHeader {
+    @include flexRow;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #fff;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:hover {
+      background-color: #fafafa;
+    }
+  }
+
+  .summaryContent {
+    @include flexCol;
+    gap: 20px;
+    padding: 16px;
+
+    .productList {
+      @include flexCol;
+      gap: 16px;
+      max-height: 400px;
+      overflow-y: auto;
+
+      .productItem {
+        @include flexRow;
+        gap: 12px;
+        padding: 12px;
         background-color: #fff;
-    }
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
 
-    .summaryContent{
-        @include flexCol;
-        gap: 20px;
-        padding: 16px;
+        .productImage {
+          width: 80px;
+          height: 80px;
+          border-radius: 8px;
+          object-fit: cover;
+          background-color: #f5f5f5;
 
-        .summaryRow{
-            @include flexRow;
-            justify-content: space-between;
-            
-            .header{
-                font-family: "RubikSemiBold";
-                font-size: 32px;
-                font-weight: 600;
-                color: #232321;
-
-                @media screen and (max-width: 768px) {
-                   font-size: 16px;
-                }
-            }
-
-            .label{
-                font-family: "SansRegular";
-                font-size: 20px;
-                font-weight: 600;
-
-                @media screen and (max-width: 768px) {
-                    font-size: 14px;
-                }
-            }
+          @media screen and (max-width: 768px) {
+            width: 60px;
+            height: 60px;
+          }
         }
+
+        .productDetails {
+          flex: 1;
+          @include flexCol;
+          gap: 8px;
+
+          .productName {
+            font-family: "RubikSemiBold";
+            font-size: 16px;
+            font-weight: 600;
+            color: #232321;
+            line-height: 1.2;
+
+            @media screen and (max-width: 768px) {
+              font-size: 14px;
+            }
+          }
+
+          .productSpecs {
+            @include flexRow;
+            gap: 12px;
+            flex-wrap: wrap;
+
+            .specLabel {
+              font-family: "SansRegular";
+              font-size: 13px;
+              color: #666;
+
+              @media screen and (max-width: 768px) {
+                font-size: 11px;
+              }
+            }
+          }
+        }
+
+        .productPrice {
+          font-family: "RubikSemiBold";
+          font-size: 18px;
+          font-weight: 600;
+          color: #4a69e2;
+          white-space: nowrap;
+
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+          }
+        }
+      }
     }
-    .header{
+
+    .summaryCalculations {
+      @include flexCol;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .summaryRow {
+      @include flexRow;
+      justify-content: space-between;
+
+      .header {
         font-family: "RubikSemiBold";
-        font-size: 32px;
+        font-size: 20px;
         font-weight: 600;
         color: #232321;
 
         @media screen and (max-width: 768px) {
-           font-size: 16px;
+          font-size: 16px;
         }
+      }
+
+      .label {
+        font-family: "SansRegular";
+        font-size: 16px;
+        font-weight: 400;
+        color: #666;
+
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
     }
 
+    .summaryDivider {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 8px 0;
+    }
+  }
+
+  .header {
+    font-family: "RubikSemiBold";
+    font-size: 24px;
+    font-weight: 600;
+    color: #232321;
+
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
 }

@@ -1,294 +1,318 @@
-@import '../../styles/mixins.scss';
+@import "../../styles/mixins.scss";
 
 .rootContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
 
-  .savingContainer {
-    @include flexCol;
-    top: 160px;
-    left: 80px;
-    gap: 8px;
-    margin: 20px;
+  @media screen and (max-width: 768px) {
+    padding: 20px 16px;
+  }
 
-    .header {
-      font-family: 'RubikSemiBold';
-      font-size: 32px;
-      font-weight: 600;
+  .headerContainer {
+    margin-bottom: 30px;
+
+    .mainHeader {
+      font-family: "RubikSemiBold";
+      font-size: 36px;
+      font-weight: 700;
       color: #232321;
+      margin-bottom: 8px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+      }
     }
 
-    .label {
-      font-family: 'SansRegular';
-      font-size: 14px;
-      font-weight: 600;
-      color: #232321;
+    .subHeader {
+      font-family: "SansRegular";
+      font-size: 16px;
+      color: #666;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
     }
   }
 
-  .checkoutContainer {
+  .emptyCart {
     @include flexCol;
-    gap: 47px;
-    align-items: flex-start;
-    margin: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
 
-    .productCard {
-      background-color: #fff;
-      border-radius: 16px;
-      width: 100%;
+    .emptyHeader {
+      font-family: "RubikSemiBold";
+      font-size: 28px;
+      font-weight: 600;
+      color: #232321;
+      margin-bottom: 12px;
 
       @media screen and (max-width: 768px) {
-        width: fit-content;
+        font-size: 22px;
       }
+    }
 
-      .detailsContainer {
+    .emptyText {
+      font-family: "SansRegular";
+      font-size: 16px;
+      color: #666;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .cartContent {
+    @include flexRow;
+    gap: 40px;
+    align-items: flex-start;
+
+    @media screen and (max-width: 968px) {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .cartItemsSection {
+      flex: 1;
+      @include flexCol;
+      gap: 20px;
+
+      .selectAllContainer {
         @include flexRow;
-        gap: 20px;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
 
-        .subDetailsContainer {
-          @include flexRow;
-          gap: 10px;
-          justify-content: space-between;
-          width: 100%;
+        .selectAllText {
+          font-family: "RubikSemiBold";
+          font-size: 16px;
+          font-weight: 600;
+          color: #232321;
 
           @media screen and (max-width: 768px) {
-            @include flexCol;
-            justify-content: none;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .cartItemsList {
+        @include flexCol;
+        gap: 16px;
+
+        .cartItem {
+          background-color: #fff;
+          border-radius: 16px;
+          border: 2px solid #e0e0e0;
+          padding: 20px;
+          transition: all 0.3s ease;
+
+          &.selected {
+            border-color: #4a69e2;
+            background-color: #f8f9ff;
           }
 
-          .productHeader {
-            @include flexCol;
-            gap: 10px;
+          @media screen and (max-width: 768px) {
+            padding: 16px;
+          }
 
-            .header {
-              font-family: 'RubikSemiBold';
-              font-size: 32px;
+          .itemContent {
+            @include flexRow;
+            gap: 16px;
+            align-items: flex-start;
+
+            .itemImage {
+              width: 140px;
+              height: 140px;
+              border-radius: 12px;
+              object-fit: cover;
+              background-color: #f5f5f5;
+
+              @media screen and (max-width: 768px) {
+                width: 100px;
+                height: 100px;
+              }
+            }
+
+            .itemDetails {
+              flex: 1;
+              @include flexCol;
+              gap: 12px;
+
+              .itemName {
+                font-family: "RubikSemiBold";
+                font-size: 20px;
+                font-weight: 600;
+                color: #232321;
+                line-height: 1.3;
+
+                @media screen and (max-width: 768px) {
+                  font-size: 16px;
+                }
+              }
+
+              .itemSpecs {
+                @include flexRow;
+                gap: 20px;
+                flex-wrap: wrap;
+
+                .specText {
+                  font-family: "SansRegular";
+                  font-size: 14px;
+                  color: #666;
+
+                  @media screen and (max-width: 768px) {
+                    font-size: 12px;
+                  }
+                }
+              }
+
+              .itemActions {
+                @include flexRow;
+                gap: 20px;
+                align-items: center;
+                margin-top: 8px;
+
+                .quantityControl {
+                  @include flexRow;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 4px 8px;
+                  border: 1px solid #e0e0e0;
+                  border-radius: 8px;
+                  background-color: #fff;
+
+                  .quantityText {
+                    font-family: "RubikSemiBold";
+                    font-size: 16px;
+                    min-width: 30px;
+                    text-align: center;
+
+                    @media screen and (max-width: 768px) {
+                      font-size: 14px;
+                    }
+                  }
+                }
+
+                .deleteButton {
+                  color: #ff4444;
+                  transition: transform 0.2s ease;
+
+                  &:hover {
+                    transform: scale(1.1);
+                  }
+                }
+              }
+            }
+
+            .itemPriceSection {
+              @include flexCol;
+              align-items: flex-end;
+              gap: 8px;
+
+              .itemPrice {
+                font-family: "RubikSemiBold";
+                font-size: 22px;
+                font-weight: 600;
+                color: #4a69e2;
+                white-space: nowrap;
+
+                @media screen and (max-width: 768px) {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .summarySection {
+      width: 400px;
+      position: sticky;
+      top: 100px;
+
+      @media screen and (max-width: 968px) {
+        width: 100%;
+        position: relative;
+        top: 0;
+      }
+
+      .summaryCard {
+        background-color: #f9f9f9;
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid #e0e0e0;
+
+        @media screen and (max-width: 768px) {
+          padding: 20px;
+        }
+
+        .summaryHeader {
+          font-family: "RubikSemiBold";
+          font-size: 24px;
+          font-weight: 600;
+          color: #232321;
+          margin-bottom: 20px;
+
+          @media screen and (max-width: 768px) {
+            font-size: 20px;
+          }
+        }
+
+        .summaryContent {
+          @include flexCol;
+          gap: 12px;
+
+          .summaryRow {
+            @include flexRow;
+            justify-content: space-between;
+            align-items: center;
+
+            .summaryLabel {
+              font-family: "SansRegular";
+              font-size: 16px;
+              color: #666;
+
+              @media screen and (max-width: 768px) {
+                font-size: 14px;
+              }
+            }
+
+            .summaryValue {
+              font-family: "RubikSemiBold";
+              font-size: 16px;
               font-weight: 600;
               color: #232321;
 
               @media screen and (max-width: 768px) {
-                font-size: 16px;
+                font-size: 14px;
               }
             }
 
-            .sizeContainer {
-              @include flexRow;
-              gap: 20px;
-              align-items: flex-end;
-              flex-wrap: wrap;
+            .summaryTotal {
+              font-family: "RubikSemiBold";
+              font-size: 20px;
+              font-weight: 700;
+              color: #232321;
 
-              @media screen and (max-width: 320px) {
-                gap: 0px;
-              }
-
-              .label {
-                font-family: 'SansRegular';
-                font-size: 20px;
-                font-weight: 600;
-                color: #232321;
-
-                @media screen and (max-width: 768px) {
-                  font-size: 10px;
-                }
-              }
-            }
-
-            .quantityContainer {
-              @include flexRow;
-              gap: 10px;
-              align-items: center;
-              margin-top: 5px;
-
-              .label {
-                font-family: 'SansRegular';
-                font-size: 16px;
-                font-weight: 600;
-                color: #232321;
-                min-width: 30px;
-                text-align: center;
-
-                @media screen and (max-width: 768px) {
-                  font-size: 12px;
-                }
+              @media screen and (max-width: 768px) {
+                font-size: 18px;
               }
             }
           }
-        }
 
-        .categoryImg {
-          width: 207.82px;
-          height: 225px;
-          border-radius: 24px;
-          background-color: #edeef0;
-
-          @media screen and (max-width: 768px) {
-            width: 136px;
-            height: 145px;
-            border-radius: 24px;
+          .summaryDivider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 12px 0;
           }
-        }
-
-        .amount {
-          color: #4a69e2;
-          font-family: 'RubikSemiBold';
-          font-size: 24px;
-          font-weight: 600;
-          height: fit-content;
-          padding-top: 10px;
-
-          @media screen and (max-width: 768px) {
-            font-size: 16px;
-          }
-        }
-      }
-
-      .header {
-        font-family: 'RubikSemiBold';
-        font-size: 32px;
-        font-weight: 600;
-        color: #232321;
-
-        @media screen and (max-width: 768px) {
-          font-size: 16px;
-        }
-      }
-
-      .label {
-        font-family: 'SansRegular';
-        font-size: 14px;
-        font-weight: 600;
-        color: #232321;
-
-        @media screen and (max-width: 768px) {
-          font-size: 12px;
-        }
-      }
-
-      .subHeader {
-        font-family: 'SansRegular';
-        font-size: 16px;
-        font-weight: 400;
-        color: #666;
-        margin-bottom: 10px;
-
-        @media screen and (max-width: 768px) {
-          font-size: 14px;
-        }
-      }
-
-      .summaryContainer {
-        margin-top: 30px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 12px;
-
-        .summaryRow {
-          @include flexRow;
-          justify-content: space-between;
-          margin-bottom: 10px;
-        }
-
-        .checkoutButton {
-          width: 100%;
-          padding: 16px;
-          margin-top: 20px;
-          background-color: #232321;
-          color: #fff;
-          font-family: 'RubikSemiBold';
-          font-size: 16px;
-          font-weight: 600;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: #4a69e2;
-          }
-
-          &:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-          }
-
-          @media screen and (max-width: 768px) {
-            font-size: 14px;
-            padding: 14px;
-          }
-        }
-      }
-    }
-  }
-
-  .newDropContainer {
-    @include flexCol;
-    gap: 20px;
-    width: 100%;
-
-    .dropContent {
-      @include flexRow;
-      justify-content: space-between;
-      align-items: end;
-
-      .header {
-        color: var(--Dark-Gray, #232321);
-        font-family: RubikSemiBold;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 95%;
-        text-transform: uppercase;
-        margin: 20px;
-
-        @media screen and (max-width: 768px) {
-          font-size: 14px;
-        }
-      }
-
-      .buttonGroup {
-        display: flex;
-        .arrowBtn {
-          width: 16px;
-          height: 16px;
-          padding: 8px 12px;
-          cursor: pointer;
-          font-size: 24px;
-          margin-left: 10px;
-          border-radius: 8px;
-          background: var(--Gray, #e7e7e3);
-        }
-      }
-
-      .button {
-        width: fit-content;
-        height: 48px;
-        padding: 0.5rem 1rem;
-        background-color: rgba(74, 105, 226, 1);
-        border: none;
-        border-radius: 0.5rem;
-        margin-top: 1rem;
-        color: #fff;
-        font-family: RubikSemiBold;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        letter-spacing: 0.25px;
-        margin: 20px;
-        text-transform: uppercase;
-        cursor: pointer;
-        @media screen and (max-width: 768px) {
-          display: flex;
-          height: 40px;
-          padding: 8px 16px;
-          justify-content: center;
-          align-items: center;
-          gap: 4px;
-          align-self: stretch;
-          font-family: RubikSemiBold;
         }
       }
     }

@@ -1,0 +1,296 @@
+@import '../../styles/mixins.scss';
+
+.rootContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .savingContainer {
+    @include flexCol;
+    top: 160px;
+    left: 80px;
+    gap: 8px;
+    margin: 20px;
+
+    .header {
+      font-family: 'RubikSemiBold';
+      font-size: 32px;
+      font-weight: 600;
+      color: #232321;
+    }
+
+    .label {
+      font-family: 'SansRegular';
+      font-size: 14px;
+      font-weight: 600;
+      color: #232321;
+    }
+  }
+
+  .checkoutContainer {
+    @include flexCol;
+    gap: 47px;
+    align-items: flex-start;
+    margin: 20px;
+
+    .productCard {
+      background-color: #fff;
+      border-radius: 16px;
+      width: 100%;
+
+      @media screen and (max-width: 768px) {
+        width: fit-content;
+      }
+
+      .detailsContainer {
+        @include flexRow;
+        gap: 20px;
+
+        .subDetailsContainer {
+          @include flexRow;
+          gap: 10px;
+          justify-content: space-between;
+          width: 100%;
+
+          @media screen and (max-width: 768px) {
+            @include flexCol;
+            justify-content: none;
+          }
+
+          .productHeader {
+            @include flexCol;
+            gap: 10px;
+
+            .header {
+              font-family: 'RubikSemiBold';
+              font-size: 32px;
+              font-weight: 600;
+              color: #232321;
+
+              @media screen and (max-width: 768px) {
+                font-size: 16px;
+              }
+            }
+
+            .sizeContainer {
+              @include flexRow;
+              gap: 20px;
+              align-items: flex-end;
+              flex-wrap: wrap;
+
+              @media screen and (max-width: 320px) {
+                gap: 0px;
+              }
+
+              .label {
+                font-family: 'SansRegular';
+                font-size: 20px;
+                font-weight: 600;
+                color: #232321;
+
+                @media screen and (max-width: 768px) {
+                  font-size: 10px;
+                }
+              }
+            }
+
+            .quantityContainer {
+              @include flexRow;
+              gap: 10px;
+              align-items: center;
+              margin-top: 5px;
+
+              .label {
+                font-family: 'SansRegular';
+                font-size: 16px;
+                font-weight: 600;
+                color: #232321;
+                min-width: 30px;
+                text-align: center;
+
+                @media screen and (max-width: 768px) {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+
+        .categoryImg {
+          width: 207.82px;
+          height: 225px;
+          border-radius: 24px;
+          background-color: #edeef0;
+
+          @media screen and (max-width: 768px) {
+            width: 136px;
+            height: 145px;
+            border-radius: 24px;
+          }
+        }
+
+        .amount {
+          color: #4a69e2;
+          font-family: 'RubikSemiBold';
+          font-size: 24px;
+          font-weight: 600;
+          height: fit-content;
+          padding-top: 10px;
+
+          @media screen and (max-width: 768px) {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .header {
+        font-family: 'RubikSemiBold';
+        font-size: 32px;
+        font-weight: 600;
+        color: #232321;
+
+        @media screen and (max-width: 768px) {
+          font-size: 16px;
+        }
+      }
+
+      .label {
+        font-family: 'SansRegular';
+        font-size: 14px;
+        font-weight: 600;
+        color: #232321;
+
+        @media screen and (max-width: 768px) {
+          font-size: 12px;
+        }
+      }
+
+      .subHeader {
+        font-family: 'SansRegular';
+        font-size: 16px;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 10px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      .summaryContainer {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+
+        .summaryRow {
+          @include flexRow;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+
+        .checkoutButton {
+          width: 100%;
+          padding: 16px;
+          margin-top: 20px;
+          background-color: #232321;
+          color: #fff;
+          font-family: 'RubikSemiBold';
+          font-size: 16px;
+          font-weight: 600;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #4a69e2;
+          }
+
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+            padding: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .newDropContainer {
+    @include flexCol;
+    gap: 20px;
+    width: 100%;
+
+    .dropContent {
+      @include flexRow;
+      justify-content: space-between;
+      align-items: end;
+
+      .header {
+        color: var(--Dark-Gray, #232321);
+        font-family: RubikSemiBold;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 95%;
+        text-transform: uppercase;
+        margin: 20px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+
+      .buttonGroup {
+        display: flex;
+        .arrowBtn {
+          width: 16px;
+          height: 16px;
+          padding: 8px 12px;
+          cursor: pointer;
+          font-size: 24px;
+          margin-left: 10px;
+          border-radius: 8px;
+          background: var(--Gray, #e7e7e3);
+        }
+      }
+
+      .button {
+        width: fit-content;
+        height: 48px;
+        padding: 0.5rem 1rem;
+        background-color: rgba(74, 105, 226, 1);
+        border: none;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        color: #fff;
+        font-family: RubikSemiBold;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.25px;
+        margin: 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        @media screen and (max-width: 768px) {
+          display: flex;
+          height: 40px;
+          padding: 8px 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          align-self: stretch;
+          font-family: RubikSemiBold;
+        }
+      }
+    }
+  }
+}
