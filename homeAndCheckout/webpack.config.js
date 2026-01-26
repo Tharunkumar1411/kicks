@@ -78,6 +78,7 @@ module.exports = (_, argv) => ({
         zustand: {
           singleton: true,
           requiredVersion: deps.zustand,
+          eager: true,
         },
       },
     }),
