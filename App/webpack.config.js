@@ -66,7 +66,9 @@ module.exports = (_, argv) => ({
             : "home@https://kicks-home.vercel.app/home-app.js", // Reference your deployed microfrontend
       },
       shared: {
-        ...deps,
+        ...Object.fromEntries(
+          Object.entries(deps).filter(([key]) => key !== "zustand")
+        ),
         react: {
           singleton: true,
           requiredVersion: deps.react,
@@ -74,11 +76,6 @@ module.exports = (_, argv) => ({
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
-        },
-        zustand: {
-          singleton: true,
-          requiredVersion: deps.zustand,
-          eager: true,
         },
       },
     }),
