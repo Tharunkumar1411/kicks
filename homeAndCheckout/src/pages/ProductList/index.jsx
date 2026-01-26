@@ -128,7 +128,11 @@ export default function ProductList() {
                   </Typography>
                   <CloseIcon onClick={handleFilter} />
                 </div>
-                <FilterComponent filter={filter} setFilter={setFilter} />
+                <FilterComponent
+                  filter={filter}
+                  setFilter={setFilter}
+                  onApply={() => setFilterDrawer(false)}
+                />
               </div>
             </Drawer>
           )}

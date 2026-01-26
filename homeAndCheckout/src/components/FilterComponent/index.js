@@ -14,7 +14,7 @@ import CustomButton from "../CustomButton";
 import useProductStore from "../../store/productList";
 import { filterProduct } from "../../utils/helper";
 
-const FilterComponent = ({ filter, setFilter, data }) => {
+const FilterComponent = ({ filter, setFilter, data, onApply }) => {
   const [dropDown, setDropDown] = useState({
     category: true,
     gender: true,
@@ -74,6 +74,10 @@ const FilterComponent = ({ filter, setFilter, data }) => {
   const handleApply = () => {
     const filteredList = filterProduct(originalProductList, filter);
     setProductList(filteredList);
+    // Close drawer if callback provided
+    if (onApply) {
+      onApply();
+    }
   };
 
   const handleReset = () => {

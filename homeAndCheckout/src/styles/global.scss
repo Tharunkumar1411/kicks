@@ -1,4 +1,56 @@
+@import './theme.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// CSS Custom Properties for use in inline styles and JS
+:root {
+  // Colors
+  --color-primary: #{$color-primary};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+  --color-dark-gray: #{$color-dark-gray};
+  --color-medium-gray: #{$color-medium-gray};
+  --color-light-gray: #{$color-light-gray};
+  --color-extra-light-gray: #{$color-extra-light-gray};
+  --color-background: #{$color-background};
+  --color-background-light: #{$color-background-light};
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+  --color-success: #{$color-success};
+  --color-error: #{$color-error};
+  --color-warning: #{$color-warning};
+  --color-info: #{$color-info};
+  --color-border: #{$color-border};
+  --color-border-dark: #{$color-border-dark};
+  --color-text-primary: #{$color-text-primary};
+  --color-text-secondary: #{$color-text-secondary};
+
+  // Spacing
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-base: #{$spacing-base};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+
+  // Border Radius
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+}
+
 body {
-    background-color: #E7E7E3;
-    overflow-x: hidden;
+  background-color: $color-background;
+  overflow-x: hidden;
+  font-family: $font-secondary-regular;
+  color: $color-text-primary;
+  line-height: $line-height-normal;
+}
+
+html, body {
+  min-height: 100vh;
 }
