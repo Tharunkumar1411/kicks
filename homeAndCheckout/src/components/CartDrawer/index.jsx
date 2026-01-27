@@ -86,7 +86,7 @@ export default function Cart({ setOpenCart }) {
                 {cartItems.map((item, index) => (
                   <div className={styles.detailsContainer} key={index}>
                     <img
-                      src={item.image}
+                      src={item.image || item.url}
                       alt={item.productName}
                       className={styles.categoryImg}
                     />

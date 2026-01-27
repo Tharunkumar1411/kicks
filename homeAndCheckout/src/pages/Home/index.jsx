@@ -78,7 +78,12 @@ const Home = () => {
               <span className={styles.subHeader}>
                 {homeDetails?.topBanner?.description}
               </span>
-              <button className={styles.button}>SHOP NOW</button>
+              <button
+                className={styles.button}
+                onClick={() => nav(ROUTES.PRODUCT_LIST)}
+              >
+                SHOP NOW
+              </button>
             </div>
 
             <div className={styles.previewBannerContainer}>

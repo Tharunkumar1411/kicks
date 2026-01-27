@@ -1,22 +1,26 @@
-import { Typography } from "@mui/material";
+import { Typography, Drawer } from "@mui/material";
 import { useRef, useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
 import useHomeStore from "../../store/home";
+import useCartStore from "../../store/cart";
 import ImageWithSkeleton from "../ImageWithSkelton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CartDrawer from "../CartDrawer";
 
 const NewDropCard = () => {
   const navigate = useNavigate();
   const homeDetails = useHomeStore((state) => state.homeDetails);
+  const { isProductInCart, addToCart } = useCartStore((state) => state);
   const scrollContainerRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [openCart, setOpenCart] = useState(false);
 
-  const handleProduct = (productId) => {
-    navigate(`${ROUTES.PRODUCT}/${productId}`);
+  const handleProductClick = (product) => {
+    navigate(`${ROUTES.PRODUCT}/${product.productId}`);
   };
 
   const scroll = (direction) => {
@@ -56,58 +60,62 @@ const NewDropCard = () => {
     };
   }, [homeDetails?.newDrops]);
 
+  const handleAddClick = (product) => {
+    addToCart(product);
+    setOpenCart(true);
+  };
+
   return (
-    <div className={styles.carouselWrapper}>
-      {showLeftArrow && (
-        <button
-          className={`${styles.navButton} ${styles.navButtonLeft}`}
-          onClick={() => scroll("left")}
-          aria-label="Scroll left"
-        >
-          <ChevronLeftIcon fontSize="large" />
-        </button>
-      )}
+    <>
+      <div className={styles.carouselWrapper}>
+        {showLeftArrow && (
+          <button
+            className={`${styles.navButton} ${styles.navButtonLeft}`}
+            onClick={() => scroll("left")}
+            aria-label="Scroll left"
+          >
+            <ChevronLeftIcon fontSize="large" />
+          </button>
+        )}
 
-      <div className={styles.rootContainer} ref={scrollContainerRef}>
-        {homeDetails?.newDrops?.map((item, index) => (
-          <div key={index} className={styles.dropContainer}>
-            <div
-              className={styles.imageContainer}
-              onClick={() => handleProduct(item?.productId)}
-            >
-              <ImageWithSkeleton
-                src={item.url}
-                alt="Hero banner"
-                className={styles.imgCard}
-                isBackground={true}
-              />
+        <div className={styles.rootContainer} ref={scrollContainerRef}>
+          {homeDetails?.newDrops?.map((item, index) => (
+            <div key={index} className={styles.dropContainer}>
+              <div className={styles.imageContainer}>
+                <ImageWithSkeleton
+                  src={item.url}
+                  alt="Hero banner"
+                  className={styles.imgCard}
+                  isBackground={true}
+                  showAddIcon={true}
+                  onClick={() => handleProductClick(item)}
+                  onAddToCart={() => handleAddClick(item)}
+                  isInCart={isProductInCart(item?.productId)}
+                />
+              </div>
+
+              <Typography className={styles.productName}>
+                {item.productName}
+              </Typography>
             </div>
+          ))}
+        </div>
 
-            <Typography className={styles.productName}>
-              {item.productName}
-            </Typography>
-            {/* <Typography className={styles.productName}>{item.price}</Typography> */}
-            {/* <button
-              onClick={() => handleProduct(item.productId)}
-              className={styles.productButton}
-            >
-              View Product -{" "}
-              <span style={{ color: "#FFA52F" }}>{item.price}</span>
-            </button> */}
-          </div>
-        ))}
+        {showRightArrow && (
+          <button
+            className={`${styles.navButton} ${styles.navButtonRight}`}
+            onClick={() => scroll("right")}
+            aria-label="Scroll right"
+          >
+            <ChevronRightIcon fontSize="large" />
+          </button>
+        )}
       </div>
 
-      {showRightArrow && (
-        <button
-          className={`${styles.navButton} ${styles.navButtonRight}`}
-          onClick={() => scroll("right")}
-          aria-label="Scroll right"
-        >
-          <ChevronRightIcon fontSize="large" />
-        </button>
-      )}
-    </div>
+      <Drawer anchor="right" open={openCart} onClose={() => setOpenCart(false)}>
+        <CartDrawer setOpenCart={setOpenCart} />
+      </Drawer>
+    </>
   );
 };
 

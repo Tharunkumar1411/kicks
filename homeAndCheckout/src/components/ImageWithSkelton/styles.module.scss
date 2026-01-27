@@ -9,6 +9,61 @@
   @include skeleton;
 }
 
+.hasAddIcon {
+  position: relative;
+}
+
+.addIconContainer {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: $color-white;
+  @include flexCenter;
+  cursor: pointer;
+  box-shadow: $shadow-md;
+  transition: all $transition-base;
+  z-index: 10;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: $shadow-lg;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.addIcon {
+  color: $color-dark-gray;
+  font-size: 24px;
+  pointer-events: none; // Prevent icon from capturing clicks
+
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.addedIcon {
+  color: $color-success;
+  font-size: 24px;
+  pointer-events: none; // Prevent icon from capturing clicks
+
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
 @keyframes shimmer {
   100% {
     transform: translateX(100%);

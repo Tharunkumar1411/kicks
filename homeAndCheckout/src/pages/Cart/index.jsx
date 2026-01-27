@@ -32,7 +32,7 @@ export default function Cart() {
 
   // Track selected items
   const [selectedItems, setSelectedItems] = useState(
-    cartItems.map((_, index) => index)
+    cartItems.map((_, index) => index),
   );
 
   const handleQuantityChange = (item, delta) => {
@@ -49,7 +49,7 @@ export default function Cart() {
       (cartItem) =>
         cartItem.productId === item.productId &&
         cartItem.size === item.size &&
-        cartItem.color === item.color
+        cartItem.color === item.color,
     );
     setSelectedItems(selectedItems.filter((idx) => idx !== itemIndex));
   };
@@ -72,7 +72,7 @@ export default function Cart() {
 
   const handleCheckout = () => {
     const itemsToCheckout = cartItems.filter((_, index) =>
-      selectedItems.includes(index)
+      selectedItems.includes(index),
     );
 
     if (itemsToCheckout.length === 0) {
@@ -168,7 +168,7 @@ export default function Cart() {
                     />
 
                     <img
-                      src={item.image}
+                      src={item.image || item.url}
                       alt={item.productName}
                       className={styles.itemImage}
                     />
@@ -269,12 +269,10 @@ export default function Cart() {
                 <div className={styles.summaryDivider} />
 
                 <div className={styles.summaryRow}>
-                  <Typography className={styles.summaryTotal}>
-                    Total
-                  </Typography>
+                  <Typography className={styles.summaryTotal}>Total</Typography>
                   <Typography className={styles.summaryTotal}>
                     {formatAmount(
-                      selectedItems.length > 0 ? getSelectedTotal() + 6.99 : 0
+                      selectedItems.length > 0 ? getSelectedTotal() + 6.99 : 0,
                     )}
                   </Typography>
                 </div>

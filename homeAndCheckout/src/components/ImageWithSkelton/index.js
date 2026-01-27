@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+import AddIcon from "@mui/icons-material/Add";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { showSuccessToast } from "../../utils/errorHandler";
 
 const ImageWithSkeleton = ({
   src,
@@ -8,6 +11,10 @@ const ImageWithSkeleton = ({
   style = {},
   isBackground = false,
   children,
+  showAddIcon = false,
+  onClick = null,
+  onAddToCart = null,
+  isInCart = false,
 }) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -20,13 +27,36 @@ const ImageWithSkeleton = ({
     img.onerror = () => setLoaded(true);
   }, [src]);
 
+  const handleAddClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onAddToCart) {
+      onAddToCart(e);
+    }
+  };
+
   if (isBackground) {
     return (
       <div
-        className={`${className} ${!loaded ? styles.skeleton : ""}`}
+        className={`${className} ${!loaded ? styles.skeleton : ""} ${
+          showAddIcon ? styles.hasAddIcon : ""
+        }`}
         style={loaded ? { ...style, backgroundImage: `url(${src})` } : style}
+        onClick={onClick}
       >
         {children}
+        {showAddIcon && (
+          <div
+            className={styles.addIconContainer}
+            onClick={(e) => handleAddClick(e)}
+          >
+            {isInCart ? (
+              <CheckCircleIcon className={styles.addedIcon} />
+            ) : (
+              <AddIcon className={styles.addIcon} />
+            )}
+          </div>
+        )}
       </div>
     );
   }

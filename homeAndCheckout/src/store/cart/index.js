@@ -66,6 +66,12 @@ const useCartStore = create(
         );
       },
 
+      // Check if product exists in cart (any size/color)
+      isProductInCart: (productId) => {
+        const { cartItems } = get();
+        return cartItems.some((item) => item.productId === productId);
+      },
+
       // Get total items count
       getTotalItems: () => {
         const { cartItems } = get();
