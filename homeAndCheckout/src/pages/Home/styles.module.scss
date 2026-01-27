@@ -1,8 +1,8 @@
 @import "../../styles/mixins.scss";
 
 .heading {
-  color: var(--Dark-Gray, #232321);
-  font-family: RubikSemiBold;
+  color: $color-dark-gray;
+  font-family: $font-primary;
   font-size: 223.5px;
   font-style: normal;
   font-weight: 700;
@@ -17,7 +17,7 @@
 }
 
 .spanHeader {
-  color: var(--Blue, #4a69e2);
+  color: $color-primary;
 }
 
 .bannerContainer {
@@ -64,11 +64,11 @@
     .bannerContent {
       @include flexCol;
       justify-content: end;
-      color: #fff;
+      color: $color-white;
 
       .header {
-        color: var(--White, #fff);
-        font-family: RubikSemiBold;
+        color: $color-white;
+        font-family: $font-primary;
         font-size: 74px;
         font-style: normal;
         font-weight: 600;
@@ -80,8 +80,8 @@
       }
 
       .subHeader {
-        color: var(--Gray, #e7e7e3);
-        font-family: SansSemiBold;
+        color: $color-background;
+        font-family: $font-secondary;
         font-size: 24px;
         font-style: normal;
         font-weight: 600;
@@ -92,12 +92,12 @@
     .button {
       width: fit-content;
       padding: 0.5rem 1rem;
-      background-color: rgba(74, 105, 226, 1);
+      background-color: $color-primary;
       border: none;
       border-radius: 0.5rem;
       margin-top: 1rem;
-      color: #fff;
-      font-family: RubikSemiBold;
+      color: $color-white;
+      font-family: $font-primary;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -145,8 +145,8 @@
     margin-top: 3rem;
 
     .header {
-      color: var(--Dark-Gray, #232321);
-      font-family: RubikSemiBold;
+      color: $color-dark-gray;
+      font-family: $font-primary;
       font-size: 48px;
       font-style: normal;
       font-weight: 600;
@@ -162,12 +162,12 @@
       width: fit-content;
       height: 48px;
       padding: 0.5rem 1rem;
-      background-color: rgba(74, 105, 226, 1);
+      background-color: $color-primary;
       border: none;
       border-radius: 0.5rem;
       margin-top: 1rem;
-      color: #fff;
-      font-family: RubikSemiBold;
+      color: $color-white;
+      font-family: $font-primary;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -183,7 +183,7 @@
         align-items: center;
         gap: 4px;
         align-self: stretch;
-        font-family: RubikSemiBold;
+        font-family: $font-primary;
       }
     }
   }
@@ -203,7 +203,7 @@
 }
 
 .categoryRoot {
-  background-color: #000;
+  background-color: $color-black;
   padding: 32px 0 0 32px;
 
   .headerContainer {
@@ -213,8 +213,8 @@
     padding: 10px;
 
     .header {
-      color: var(--White, #fff);
-      font-family: RubikSemiBold;
+      color: $color-white;
+      font-family: $font-primary;
       font-size: 74px;
       font-style: normal;
       font-weight: 600;
@@ -234,7 +234,7 @@
         font-size: 24px;
         margin-left: 10px;
         border-radius: 8px;
-        background: var(--Gray, #e7e7e3);
+        background: $color-background;
       }
     }
   }
@@ -259,8 +259,8 @@
 
       .categoryTitle {
         .title {
-          color: var(--Dark-Gray, #232321);
-          font-family: RubikSemiBold;
+          color: $color-dark-gray;
+          font-family: $font-primary;
           font-size: 36px;
           font-style: normal;
           font-weight: 600;
@@ -276,12 +276,12 @@
       .categoryLink {
         margin: 20px;
         padding: 8px;
-        background-color: #000;
+        background-color: $color-black;
         border-radius: 10px;
         .arrowLink {
           width: 32px;
           height: 32px;
-          color: #fff;
+          color: $color-white;
           @media screen and (max-width: 768px) {
             width: 16px;
             height: 16px;
@@ -301,18 +301,18 @@
 
 .reviewContainer {
   @include flexCol;
-  background-color: #000;
+  background-color: $color-black;
   .headerContainer {
     @include flexRow;
     justify-content: space-between;
     align-items: end;
     padding: 40px 30px;
     .header {
-      font-family: RubikSemiBold;
+      font-family: $font-primary;
       font-size: 74px;
       font-weight: 600;
       text-align: left;
-      color: #fff;
+      color: $color-white;
       @media screen and (max-width: 768px) {
         font-size: 24px;
         display: flex;
@@ -325,7 +325,7 @@
       align-items: end;
       .arrowBtn {
         border: 1px solid grey;
-        background-color: #fff;
+        background-color: $color-white;
         font-size: 20px;
         border-radius: 8px;
         display: flex;

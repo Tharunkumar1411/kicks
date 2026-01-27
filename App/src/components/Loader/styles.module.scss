@@ -1,7 +1,9 @@
+@import "../../styles/mixins.scss";
+
 .loadingContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   // height: 100vh;
-  color: #fff;
+  color: $color-white;
 }

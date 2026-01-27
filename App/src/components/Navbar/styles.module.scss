@@ -3,7 +3,7 @@
 .navRootContainer {
   @include flexRow;
   border-radius: 24px;
-  background: #fafafa;
+  background: $color-background-light;
   border-radius: 24px;
   padding: 15px;
   align-items: center;
@@ -38,7 +38,7 @@
 }
 
 .menuOption {
-  font-family: RubikSemiBold !important;
+  font-family: $font-primary !important;
   cursor: pointer;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .dropOption {
-  border: 1px solid #e7e7e3;
+  border: 1px solid $color-background;
   border-radius: 10px;
   padding: 10px;
   box-shadow:
@@ -65,7 +65,7 @@
   right: 0;
   padding: 1.25rem;
   padding-top: 0;
-  background-color: #e7e7e3;
+  background-color: $color-background;
   z-index: 1;
 }
 

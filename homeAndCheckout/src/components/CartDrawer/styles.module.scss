@@ -13,17 +13,17 @@
     margin: 20px;
 
     .header {
-      font-family: 'RubikSemiBold';
+      font-family: $font-primary;
       font-size: 32px;
       font-weight: 600;
-      color: #232321;
+      color: $color-dark-gray;
     }
 
     .label {
-      font-family: 'SansRegular';
+      font-family: $font-secondary-regular;
       font-size: 14px;
       font-weight: 600;
-      color: #232321;
+      color: $color-dark-gray;
     }
   }
 
@@ -34,7 +34,7 @@
     margin: 20px;
 
     .productCard {
-      background-color: #fff;
+      background-color: $color-white;
       border-radius: 16px;
       width: 100%;
 
@@ -62,10 +62,10 @@
             gap: 10px;
 
             .header {
-              font-family: 'RubikSemiBold';
+              font-family: $font-primary;
               font-size: 32px;
               font-weight: 600;
-              color: #232321;
+              color: $color-dark-gray;
 
               @media screen and (max-width: 768px) {
                 font-size: 16px;
@@ -83,10 +83,10 @@
               }
 
               .label {
-                font-family: 'SansRegular';
+                font-family: $font-secondary-regular;
                 font-size: 20px;
                 font-weight: 600;
-                color: #232321;
+                color: $color-dark-gray;
 
                 @media screen and (max-width: 768px) {
                   font-size: 10px;
@@ -101,10 +101,10 @@
               margin-top: 5px;
 
               .label {
-                font-family: 'SansRegular';
+                font-family: $font-secondary-regular;
                 font-size: 16px;
                 font-weight: 600;
-                color: #232321;
+                color: $color-dark-gray;
                 min-width: 30px;
                 text-align: center;
 
@@ -120,7 +120,7 @@
           width: 207.82px;
           height: 225px;
           border-radius: 24px;
-          background-color: #edeef0;
+          background-color: $color-extra-light-gray;
 
           @media screen and (max-width: 768px) {
             width: 136px;
@@ -130,8 +130,8 @@
         }
 
         .amount {
-          color: #4a69e2;
-          font-family: 'RubikSemiBold';
+          color: $color-primary;
+          font-family: $font-primary;
           font-size: 24px;
           font-weight: 600;
           height: fit-content;
@@ -144,10 +144,10 @@
       }
 
       .header {
-        font-family: 'RubikSemiBold';
+        font-family: $font-primary;
         font-size: 32px;
         font-weight: 600;
-        color: #232321;
+        color: $color-dark-gray;
 
         @media screen and (max-width: 768px) {
           font-size: 16px;
@@ -155,10 +155,10 @@
       }
 
       .label {
-        font-family: 'SansRegular';
+        font-family: $font-secondary-regular;
         font-size: 14px;
         font-weight: 600;
-        color: #232321;
+        color: $color-dark-gray;
 
         @media screen and (max-width: 768px) {
           font-size: 12px;
@@ -166,10 +166,10 @@
       }
 
       .subHeader {
-        font-family: 'SansRegular';
+        font-family: $font-secondary-regular;
         font-size: 16px;
         font-weight: 400;
-        color: #666;
+        color: $color-medium-gray;
         margin-bottom: 10px;
 
         @media screen and (max-width: 768px) {
@@ -180,7 +180,7 @@
       .summaryContainer {
         margin-top: 30px;
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: $color-bg-card;
         border-radius: 12px;
 
         .summaryRow {
@@ -193,9 +193,9 @@
           width: 100%;
           padding: 16px;
           margin-top: 20px;
-          background-color: #232321;
-          color: #fff;
-          font-family: 'RubikSemiBold';
+          background-color: $color-dark-gray;
+          color: $color-white;
+          font-family: $font-primary;
           font-size: 16px;
           font-weight: 600;
           border: none;
@@ -206,11 +206,11 @@
           transition: background-color 0.3s ease;
 
           &:hover {
-            background-color: #4a69e2;
+            background-color: $color-primary;
           }
 
           &:disabled {
-            background-color: #ccc;
+            background-color: $color-light-gray;
             cursor: not-allowed;
           }
 
@@ -234,8 +234,8 @@
       align-items: end;
 
       .header {
-        color: var(--Dark-Gray, #232321);
-        font-family: RubikSemiBold;
+        color: $color-dark-gray;
+        font-family: $font-primary;
         font-size: 48px;
         font-style: normal;
         font-weight: 600;
@@ -258,7 +258,7 @@
           font-size: 24px;
           margin-left: 10px;
           border-radius: 8px;
-          background: var(--Gray, #e7e7e3);
+          background: $color-background;
         }
       }
 
@@ -266,12 +266,12 @@
         width: fit-content;
         height: 48px;
         padding: 0.5rem 1rem;
-        background-color: rgba(74, 105, 226, 1);
+        background-color: $color-primary;
         border: none;
         border-radius: 0.5rem;
         margin-top: 1rem;
-        color: #fff;
-        font-family: RubikSemiBold;
+        color: $color-white;
+        font-family: $font-primary;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -288,7 +288,7 @@
           align-items: center;
           gap: 4px;
           align-self: stretch;
-          font-family: RubikSemiBold;
+          font-family: $font-primary;
         }
       }
     }

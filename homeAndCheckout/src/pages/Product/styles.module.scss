@@ -23,7 +23,7 @@
         width: 429px;
         height: 510px;
         opacity: 0px;
-        background-color: white;
+        background-color: $color-white;
         border-radius: 48px;
       }
     }
@@ -34,18 +34,18 @@
     @include flexCol;
     gap: 20px;
     .header {
-      font-family: "RubikSemiBold";
+      font-family: $font-primary;
       font-size: 32px;
       font-weight: 600;
       line-height: 37.92px;
     }
 
     .price {
-      font-family: "RubikSemiBold";
+      font-family: $font-primary;
       font-size: 24px;
       font-weight: 600;
       line-height: 28.44px;
-      color: #4a69e2;
+      color: $color-primary;
     }
 
     .btnContainer {
@@ -63,14 +63,14 @@
       gap: 20px;
 
       .header {
-        font-family: "RubikSemiBold";
+        font-family: $font-primary;
         font-size: 16px;
         font-weight: 600;
         line-height: 18.96px;
       }
 
       .subHeader {
-        font-family: "SansRegular";
+        font-family: $font-secondary-regular;
         font-size: 16px;
         font-weight: 400;
         line-height: 21.79px;
@@ -90,8 +90,8 @@
     align-items: end;
 
     .header {
-      color: var(--Dark-Gray, #232321);
-      font-family: RubikSemiBold;
+      color: $color-dark-gray;
+      font-family: $font-primary;
       font-size: 48px;
       font-style: normal;
       font-weight: 600;
@@ -114,7 +114,7 @@
         font-size: 24px;
         margin-left: 10px;
         border-radius: 8px;
-        background: var(--Gray, #e7e7e3);
+        background: $color-background;
       }
     }
 
@@ -122,12 +122,12 @@
       width: fit-content;
       height: 48px;
       padding: 0.5rem 1rem;
-      background-color: rgba(74, 105, 226, 1);
+      background-color: $color-primary;
       border: none;
       border-radius: 0.5rem;
       margin-top: 1rem;
-      color: #fff;
-      font-family: RubikSemiBold;
+      color: $color-white;
+      font-family: $font-primary;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -144,7 +144,7 @@
         align-items: center;
         gap: 4px;
         align-self: stretch;
-        font-family: RubikSemiBold;
+        font-family: $font-primary;
       }
     }
   }

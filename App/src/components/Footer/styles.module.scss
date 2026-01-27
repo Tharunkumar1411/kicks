@@ -2,7 +2,7 @@
 
 .footerRootContainer {
   overflow: hidden;
-  background-color: #4a69e2;
+  background-color: $color-primary;
   border-radius: 48px;
   margin: 20px;
 
@@ -21,9 +21,9 @@
       gap: 32px;
 
       .clubTxt {
-        font-family: RubikSemiBold;
+        font-family: $font-primary;
         font-size: 48px;
-        color: #ffffff;
+        color: $color-white;
         line-height: 56.88px;
         width: fit-content;
 
@@ -35,9 +35,9 @@
       }
 
       .clubSubTxt {
-        font-family: RubikRegular;
+        font-family: $font-primary-regular;
         font-size: 20px;
-        color: #ffffff;
+        color: $color-white;
         line-height: 27.24px;
 
         @media screen and (max-width: 768px) {
@@ -53,25 +53,25 @@
 
         .submitBtn {
           border-radius: 8px;
-          background: #232321;
+          background: $color-dark-gray;
           padding: 8px 24px 8px 24px;
-          color: #ffffff;
+          color: $color-white;
           font-size: 14px;
           letter-spacing: 0.25px;
-          font-family: RubikRegular;
+          font-family: $font-primary-regular;
         }
 
         .inputField {
-          border: 1px solid #ffffff;
+          border: 1px solid $color-white;
           border-radius: 8px;
           padding: 10px 16px 10px 16px;
           outline: none;
           background: transparent;
-          color: #ffffff;
+          color: $color-white;
         }
 
         ::placeholder {
-          color: #ffffff;
+          color: $color-white;
         }
       }
     }
@@ -90,8 +90,8 @@
   }
 
   .bottomContainer {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: $color-black;
+    color: $color-white;
     border-radius: 48px;
     .grid1 {
       @include flexRow;
@@ -107,14 +107,14 @@
         @include flexCol;
 
         .menuHeader {
-          font-family: RubikSemiBold !important;
-          color: #ffa52f;
+          font-family: $font-primary !important;
+          color: $color-warning;
           font-size: 24px;
         }
 
         .aboutTxt {
           width: 220px;
-          font-family: SansRegular !important;
+          font-family: $font-secondary-regular !important;
           line-height: 27.24px;
 
           @media screen and (max-width: 768px) {
@@ -130,12 +130,12 @@
         }
 
         .catMenu > * {
-          font-family: SansRegular !important;
+          font-family: $font-secondary-regular !important;
           line-height: 27.24px;
         }
 
         .compMenu > * {
-          font-family: SansRegular !important;
+          font-family: $font-secondary-regular !important;
           line-height: 27.24px;
         }
 

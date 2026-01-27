@@ -22,14 +22,14 @@
     }
 
     .registerTxt {
-      color: var(--Dark-Gray, #232321);
-      font-family: "RubikSemiBold";
+      color: $color-dark-gray;
+      font-family: $font-primary;
       font-size: 36px;
     }
 
     .registerSubTxt {
-      color: var(--Dark-Gray, #232321);
-      font-family: "SansRegular";
+      color: $color-dark-gray;
+      font-family: $font-secondary-regular;
       font-size: 14px;
       text-decoration: underline;
       cursor: pointer;
@@ -51,7 +51,7 @@
         align-items: center;
         flex: 1 0 0;
         border-radius: 12px;
-        border: 1px solid var(--Dark-Gray, #232321);
+        border: 1px solid $color-dark-gray;
         cursor: pointer;
         width: 32px;
         height: 32px;
@@ -69,8 +69,8 @@
       gap: 20px;
 
       .label {
-        color: var(--Dark-Gray, #232321);
-        font-family: "RubikSemiBold";
+        color: $color-dark-gray;
+        font-family: $font-primary;
         font-size: 24px;
         margin-bottom: 1rem;
       }
@@ -85,7 +85,7 @@
       }
 
       .passwordHelpTxt {
-        color: var(--Neutrals-Gray-9, #36323b);
+        color: $color-dark-gray;
         font-family: Inter;
         font-size: 12px;
         font-style: normal;
@@ -108,12 +108,12 @@
         align-items: center;
         align-self: stretch;
         border-radius: 8px;
-        background: var(--Dark-Gray, #232321);
-        color: #ffffff;
+        background: $color-dark-gray;
+        color: $color-white;
         cursor: pointer;
 
         .circleLoader {
-          color: #ffffff;
+          color: $color-white;
         }
       }
     }

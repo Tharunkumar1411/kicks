@@ -53,8 +53,8 @@
     }
 
     .productName {
-      color: var(--Dark-Gray, #232321);
-      font-family: RubikSemiBold;
+      color: $color-dark-gray;
+      font-family: $font-primary;
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
@@ -76,10 +76,9 @@
       gap: 4px;
       align-self: stretch;
       border-radius: 8px;
-      background: var(--Dark-Gray, #232321);
-      color: #fff;
-      color: var(--Pure-White, #fff);
-      font-family: RubikSemiBold;
+      background: $color-dark-gray;
+      color: $color-white;
+      font-family: $font-primary;
       font-size: 14px;
       font-style: normal;
       font-weight: 500;

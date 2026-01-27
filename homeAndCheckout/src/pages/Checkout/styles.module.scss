@@ -2,7 +2,7 @@
 
 .rootContainer {
   .label {
-    font-family: 'SansRegular';
+    font-family: $font-secondary-regular;
     font-size: 16px;
     font-weight: 600;
     @media screen and (max-width: 768px) {
@@ -10,14 +10,14 @@
     }
   }
   .header {
-    font-family: 'RubikSemiBold';
+    font-family: $font-primary;
     font-size: 32px;
     font-weight: 600;
   }
   .input {
     margin-top: 16px;
     border-radius: 8px;
-    border: 1px solid var(--Dark-Gray, #232321);
+    border: 1px solid $color-dark-gray;
     height: 48px;
     padding: 10px;
     width: 100%;
@@ -59,7 +59,7 @@
             .input {
               margin-top: 16px;
               border-radius: 8px;
-              border: 1px solid var(--Dark-Gray, #232321);
+              border: 1px solid $color-dark-gray;
               height: 48px;
               width: 100%;
               @media screen and (max-width: 768px) {
@@ -78,12 +78,12 @@
               @include flexRow;
               justify-content: space-between;
               align-items: flex-start;
-              border: 1px solid black;
+              border: 1px solid $color-black;
               padding: 16px;
               border-radius: 15px;
 
               .header {
-                font-family: 'RubikSemiBold';
+                font-family: $font-primary;
                 font-size: 24px;
                 font-weight: 600;
                 @media screen and (max-width: 768px) {
@@ -98,10 +98,10 @@
               }
 
               .amount {
-                font-family: 'RubikSemiBold';
+                font-family: $font-primary;
                 font-size: 20px;
                 font-weight: 600;
-                color: #4a69e2;
+                color: $color-primary;
                 @media screen and (max-width: 768px) {
                   font-size: 16px;
                 }

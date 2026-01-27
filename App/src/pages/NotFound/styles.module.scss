@@ -1,3 +1,5 @@
+@import "../../styles/mixins.scss";
+
 .notFountContainer {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@
 
   .header {
     text-align: center;
-    color: black;
+    color: $color-black;
     line-height: 1px;
   }
 }

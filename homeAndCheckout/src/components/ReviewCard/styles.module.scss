@@ -5,7 +5,7 @@
     width: 429px;
     gap: 8px;
     border-radius: 32px;
-    background: #FAFAFA;
+    background: $color-background-light;
     @media screen and (max-width: 768px) {
         width: 100%;
     }
@@ -17,16 +17,16 @@
         padding: 16px 16px 0 16px;
 
         .header{
-            color: var(--Dark-Gray, #232321);
-            font-family: RubikSemiBold;
+            color: var(--Dark-Gray, $color-dark-gray);
+            font-family: $font-primary;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
         }
 
         .subHeader{
-            color: var(--Dark-Gray, #232321);
-            font-family: sansRegular;
+            color: var(--Dark-Gray, $color-dark-gray);
+            font-family: $font-secondary-regular;
             font-style: normal;
             font-weight: 400;
             line-height: normal;

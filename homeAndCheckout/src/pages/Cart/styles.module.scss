@@ -44,7 +44,7 @@
     text-align: center;
 
     .emptyHeader {
-      font-family: "RubikSemiBold";
+      font-family: $font-primary;
       font-size: 28px;
       font-weight: 600;
       color: $color-dark-gray;
@@ -56,7 +56,7 @@
     }
 
     .emptyText {
-      font-family: "SansRegular";
+      font-family: $font-secondary-regular;
       font-size: 16px;
       color: $color-medium-gray;
 
@@ -91,7 +91,7 @@
         border: 1px solid $color-border;
 
         .selectAllText {
-          font-family: "RubikSemiBold";
+          font-family: $font-primary;
           font-size: 16px;
           font-weight: 600;
           color: $color-dark-gray;
@@ -115,7 +115,7 @@
 
           &.selected {
             border-color: $color-primary;
-            background-color: #f8f9ff;
+            background-color: $color-primary-bg;
           }
 
           @media screen and (max-width: 768px) {
@@ -146,7 +146,7 @@
               gap: 12px;
 
               .itemName {
-                font-family: "RubikSemiBold";
+                font-family: $font-primary;
                 font-size: 20px;
                 font-weight: 600;
                 color: $color-dark-gray;
@@ -163,7 +163,7 @@
                 flex-wrap: wrap;
 
                 .specText {
-                  font-family: "SansRegular";
+                  font-family: $font-secondary-regular;
                   font-size: 14px;
                   color: $color-medium-gray;
 
@@ -189,7 +189,7 @@
                   background-color: $color-white;
 
                   .quantityText {
-                    font-family: "RubikSemiBold";
+                    font-family: $font-primary;
                     font-size: 16px;
                     min-width: 30px;
                     text-align: center;
@@ -217,7 +217,7 @@
               gap: 8px;
 
               .itemPrice {
-                font-family: "RubikSemiBold";
+                font-family: $font-primary;
                 font-size: 22px;
                 font-weight: 600;
                 color: $color-primary;
@@ -255,7 +255,7 @@
         }
 
         .summaryHeader {
-          font-family: "RubikSemiBold";
+          font-family: $font-primary;
           font-size: 24px;
           font-weight: 600;
           color: $color-dark-gray;
@@ -276,7 +276,7 @@
             align-items: center;
 
             .summaryLabel {
-              font-family: "SansRegular";
+              font-family: $font-secondary-regular;
               font-size: 16px;
               color: $color-medium-gray;
 
@@ -286,7 +286,7 @@
             }
 
             .summaryValue {
-              font-family: "RubikSemiBold";
+              font-family: $font-primary;
               font-size: 16px;
               font-weight: 600;
               color: $color-dark-gray;
@@ -297,7 +297,7 @@
             }
 
             .summaryTotal {
-              font-family: "RubikSemiBold";
+              font-family: $font-primary;
               font-size: 20px;
               font-weight: 700;
               color: $color-dark-gray;
