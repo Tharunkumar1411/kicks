@@ -8,14 +8,22 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { NavItems } from "../../../utils/constants";
+import styles from "./styles.module.scss";
 
 export default function NavDrawer({ open, setOpen }) {
   const [user, setUser] = React.useState(null);
+  const [logoutDialogOpen, setLogoutDialogOpen] = React.useState(false);
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -29,82 +37,96 @@ export default function NavDrawer({ open, setOpen }) {
     setOpen(newOpen);
   };
 
-  const handleLogout = async () => {
+  const handleLogoutClick = () => {
+    setLogoutDialogOpen(true);
+  };
+
+  const handleLogoutConfirm = async () => {
     await signOut(auth);
+    setLogoutDialogOpen(false);
     setOpen(false);
+  };
+
+  const handleLogoutCancel = () => {
+    setLogoutDialogOpen(false);
   };
 
   return (
     <Drawer open={open} onClose={toggleDrawer(false)}>
-      <Box
-        sx={{
-          width: 250,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-        role="presentation"
-      >
+      <Box className={styles.drawerContainer} role="presentation">
         {user && (
-          <Box
-            sx={{
-              p: 2,
-              display: "flex",
-              alignItems: "center",
-              gap: 1.5,
-            }}
-          >
-            <Avatar src={user.photoURL || ""}>
+          <Box className={styles.userSection}>
+            <Avatar
+              src={user.photoURL || ""}
+              className={styles.avatar}
+            >
               {user.displayName?.[0] || user.email?.[0]}
             </Avatar>
 
-            <Box>
-              <Typography variant="subtitle1">
+            <Box className={styles.userInfo}>
+              <Typography className={styles.userName}>
                 {user.displayName || "User"}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography className={styles.userEmail}>
                 {user.email}
               </Typography>
             </Box>
           </Box>
         )}
 
-        <Divider />
+        <Divider className={styles.divider} />
 
-        <Box sx={{ flexGrow: 1 }}>
+        <Box className={styles.menuSection}>
           <List>
             {NavItems.map((text) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <ListItemText primary={text} />
-                    <AddIcon fontSize="small" />
-                  </Box>
+                <ListItemButton className={styles.menuItem}>
+                  <Typography className={styles.menuText}>{text}</Typography>
+                  <AddIcon fontSize="small" className={styles.addIcon} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
         </Box>
 
-        <Divider />
+        <Divider className={styles.divider} />
 
         {user && (
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton onClick={handleLogout}>
-                <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
-                <ListItemText primary="Logout" />
-              </ListItemButton>
-            </ListItem>
-          </List>
+          <Box className={styles.logoutSection}>
+            <List>
+              <ListItem disablePadding>
+                <ListItemButton
+                  onClick={handleLogoutClick}
+                  className={styles.logoutButton}
+                >
+                  <LogoutIcon fontSize="small" className={styles.logoutIcon} />
+                  <Typography className={styles.logoutText}>Logout</Typography>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Box>
         )}
       </Box>
+
+      <Dialog
+        open={logoutDialogOpen}
+        onClose={handleLogoutCancel}
+        aria-labelledby="drawer-logout-dialog-title"
+        aria-describedby="drawer-logout-dialog-description"
+      >
+        <DialogTitle id="drawer-logout-dialog-title">Confirm Logout</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="drawer-logout-dialog-description">
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogoutCancel}>Cancel</Button>
+          <Button onClick={handleLogoutConfirm} color="primary" autoFocus>
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Drawer>
   );
 }

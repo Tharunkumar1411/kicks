@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { showSuccessToast } from "../../utils/errorHandler";
 
 const ImageWithSkeleton = ({
   src,

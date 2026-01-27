@@ -2,7 +2,16 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import { Badge, Typography } from "@mui/material";
+import {
+  Badge,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from "@mui/material";
 import { Squash as Hamburger } from "hamburger-react";
 import PersonIcon from "@mui/icons-material/Person";
 import logoImg from "../../assets/images/Logo.svg";
@@ -20,6 +29,7 @@ function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [open, setOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const { cartItems } = useCartStore((state) => state);
   const { userDetails, clearUserDetails } = useUserStore((state) => state);
 
@@ -31,10 +41,19 @@ function NavBar() {
     }
   };
 
-  const handleLogoutUser = () => {
+  const handleLogoutClick = () => {
+    setLogoutDialogOpen(true);
+  };
+
+  const handleLogoutConfirm = () => {
     clearUserDetails();
     handleLogout();
+    setLogoutDialogOpen(false);
     nav(ROUTES.LOGIN);
+  };
+
+  const handleLogoutCancel = () => {
+    setLogoutDialogOpen(false);
   };
 
   return (
@@ -60,15 +79,15 @@ function NavBar() {
 
         <div className={styles.navProfileItems}>
           {userDetails?.email && !isMobile ? (
-            <div className={styles.userDetailsContainer}>
+            <div
+              className={styles.userDetailsContainer}
+              onClick={handleLogoutClick}
+            >
               <Typography className={styles.userNameText}>
                 Hi, {userDetails?.displayName ?? "User"}
               </Typography>
 
-              <LogoutIcon
-                onClick={handleLogoutUser}
-                style={{ cursor: "pointer" }}
-              />
+              <LogoutIcon style={{ cursor: "pointer" }} />
             </div>
           ) : (
             <PersonIcon
@@ -87,6 +106,26 @@ function NavBar() {
       </div>
 
       {isMobile && <NavDrawer open={open} setOpen={setOpen} />}
+
+      <Dialog
+        open={logoutDialogOpen}
+        onClose={handleLogoutCancel}
+        aria-labelledby="logout-dialog-title"
+        aria-describedby="logout-dialog-description"
+      >
+        <DialogTitle id="logout-dialog-title">Confirm Logout</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="logout-dialog-description">
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogoutCancel}>Cancel</Button>
+          <Button onClick={handleLogoutConfirm} color="primary" autoFocus>
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

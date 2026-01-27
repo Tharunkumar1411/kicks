@@ -250,8 +250,8 @@
       gap: $spacing-sm;
 
       .arrowBtn {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         @include flexCenter;
         cursor: pointer;
         font-size: 20px;
@@ -265,8 +265,8 @@
         }
 
         @media screen and (max-width: 768px) {
-          width: 32px;
-          height: 32px;
+          width: 22px;
+          height: 22px;
           font-size: 16px;
         }
       }
@@ -331,4 +331,3 @@
     }
   }
 }
-
