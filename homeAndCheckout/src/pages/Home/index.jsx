@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <div style={{ margin: "20px" }}>
+      <div className={styles.homeContainer}>
         <div className={`${styles.bannerContainer}`}>
           <ImageWithSkeleton
             src={homeBannerUrl}
