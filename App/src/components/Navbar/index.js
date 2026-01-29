@@ -65,7 +65,11 @@ function NavBar() {
           ) : (
             <div className={styles.navMenuItems}>
               {NavItems.map((item, idx) => (
-                <Typography className={styles.menuOption} key={idx}>
+                <Typography
+                  className={styles.menuOption}
+                  key={idx}
+                  onClick={() => nav(ROUTES.PRODUCT_LIST, { replace: true })}
+                >
                   {item}
                 </Typography>
               ))}
@@ -74,7 +78,11 @@ function NavBar() {
         </div>
 
         <div className={styles.logo}>
-          <img src={logoImg} alt="logo" onClick={() => nav(ROUTES.HOME)} />
+          <img
+            src={logoImg}
+            alt="logo"
+            onClick={() => nav(ROUTES.HOME, { replace: true })}
+          />
         </div>
 
         <div className={styles.navProfileItems}>
@@ -99,7 +107,7 @@ function NavBar() {
           <Badge badgeContent={cartItems?.length} color="primary">
             <CartIcon
               style={{ cursor: "pointer" }}
-              onClick={() => nav(ROUTES.CART)}
+              onClick={() => nav(ROUTES.CART, { replace: true })}
             />
           </Badge>
         </div>
